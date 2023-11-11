@@ -8,6 +8,9 @@ dependencies:
   vue:
     specifier: 3.2.31
     version: registry.npmmirror.com/vue@3.2.31
+  vue-router:
+    specifier: '4'
+    version: registry.npmmirror.com/vue-router@4.2.5(vue@3.2.31)
 
 devDependencies:
   '@vitejs/plugin-vue':
@@ -677,6 +680,12 @@ packages:
     dependencies:
       '@vue/compiler-dom': registry.npmmirror.com/@vue/compiler-dom@3.2.31
       '@vue/shared': registry.npmmirror.com/@vue/shared@3.2.31
+
+  registry.npmmirror.com/@vue/devtools-api@6.5.1:
+    resolution: {integrity: sha512-+KpckaAQyfbvshdDW5xQylLni1asvNSGme1JFs8I1+/H5pHEhqUKMEQD/qn3Nx5+/nycBq11qAEi8lk+LXI2dA==, tarball: https://registry.npmmirror.com/@vue/devtools-api/-/devtools-api-6.5.1.tgz}
+    name: '@vue/devtools-api'
+    version: 6.5.1
+    dev: false
 
   registry.npmmirror.com/@vue/reactivity-transform@3.2.31:
     resolution: {integrity: sha512-uS4l4z/W7wXdI+Va5pgVxBJ345wyGFKvpPYtdSgvfJfX/x2Ymm6ophQlXXB6acqGHtXuBqNyyO3zVp9b1r0MOA==, tarball: https://registry.npmmirror.com/@vue/reactivity-transform/-/reactivity-transform-3.2.31.tgz}
@@ -1963,6 +1972,18 @@ packages:
       vscode-pug-languageservice: registry.npmmirror.com/vscode-pug-languageservice@0.29.8
       vscode-typescript-languageservice: registry.npmmirror.com/vscode-typescript-languageservice@0.29.8
     dev: true
+
+  registry.npmmirror.com/vue-router@4.2.5(vue@3.2.31):
+    resolution: {integrity: sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-4.2.5.tgz}
+    id: registry.npmmirror.com/vue-router/4.2.5
+    name: vue-router
+    version: 4.2.5
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': registry.npmmirror.com/@vue/devtools-api@6.5.1
+      vue: registry.npmmirror.com/vue@3.2.31
+    dev: false
 
   registry.npmmirror.com/vue-tsc@0.29.8(typescript@4.6.3):
     resolution: {integrity: sha512-pT0wLRjvRuSmB+J4WJT6uuV9mO0KtSSXEAtaVXZQzyk5+DJdbLIQTbRce/TXSkfqt1l1WogO78RjtOJFiMCgfQ==, tarball: https://registry.npmmirror.com/vue-tsc/-/vue-tsc-0.29.8.tgz}
