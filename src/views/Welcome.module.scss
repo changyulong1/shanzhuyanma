@@ -1,0 +1,24 @@
+.wrapper {
+
+    height: 100vh;
+    display: flex;
+    background: red;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: linear-gradient(to bottom, #5d33be 0%, #8f4cd7 100%);
+
+    >header {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 66px;
+    }
+
+    >main {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -1,14 +1,16 @@
 import { defineComponent } from "vue";
 import { RouterLink, RouterView } from "vue-router";
-
+import icon from '../assets/icons/mangosteen.svg'
+import s from './Welcome.module.scss'
 export const welcome = defineComponent({
     setup() {
         return () => (
-            <div>
+            <div class={s.wrapper}>
                 <header>
-                    山竹记账
+                    <img src={icon} />
+                    <h1>山竹记账</h1>
                 </header>
-                <RouterView />
+                <main><RouterView /></main>
             </div>
         )
     }

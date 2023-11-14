@@ -1,14 +1,10 @@
-import { Aoo } from '../views/Aoo'
-import { Foo } from '../views/Foo'
-import { welcome } from '../views/welcome'
+import { welcome } from '../views/Welcome'
 import { First } from '../components/welcome/Frst'
 import { Forth } from '../components/welcome/Forth'
 import { Second } from '../components/welcome/Second'
 import { Third } from '../components/welcome/Third'
 
 export const routes = [
-    { path: '/', component: Aoo },
-    { path: '/about', component: Foo },
     {
         path: '/welcome',
         component: welcome,
