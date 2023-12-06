@@ -10,11 +10,6 @@ export const Third = defineComponent({
                     <img src={icon} alt="" />
                     <h2>云备份<br />再也不怕数据丢失</h2>
                 </div>
-                <div class={s.actions}>
-                    <RouterLink class={s.fake} to='/start'>跳过</RouterLink>
-                    <RouterLink to='/welcome/2'>下一页</RouterLink>
-                    <RouterLink to='/start'>跳过</RouterLink>
-                </div>
             </div>
 
         )

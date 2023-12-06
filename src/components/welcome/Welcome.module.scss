@@ -19,26 +19,25 @@
             color: #333;
         }
     }
+}
 
-    >.actions {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: var(--welcome-bg-end);
-        z-index: var(-z-index-bottom-nav);
-        height: var(--welcome-nav-height);
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        font-size: 24px;
-        padding: 0 16px;
-        padding-bottom: var(--welcome-nav-gap);
-        color: var(--welcome-text);
+.actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--welcome-bg-end);
+    z-index: var(-z-index-bottom-nav);
+    height: var(--welcome-nav-height);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 24px;
+    padding: 0 16px;
+    padding-bottom: var(--welcome-nav-gap);
+    color: var(--welcome-text);
 
-
-        >.fake {
-            visibility: hidden;
-        }
+    >.fake {
+        visibility: hidden;
     }
 }
