@@ -1,5 +1,3 @@
-import { defineComponent } from 'vue'
-import icon from '../../assets/icons/cloud.svg'
 import s from './Welcome.module.scss'
 export const Third = () => {
     return (

@@ -1,4 +1,3 @@
-import { defineComponent } from 'vue'
 import { RouterLink } from 'vue-router'
 import s from './Welcome.module.scss'
 export const ForthAction = () => {

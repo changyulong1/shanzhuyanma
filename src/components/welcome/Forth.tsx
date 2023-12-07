@@ -1,5 +1,3 @@
-import { defineComponent } from 'vue'
-import icon from '../../assets/icons/clock.svg'
 import s from './Welcome.module.scss'
 export const Forth = () => {
     return (

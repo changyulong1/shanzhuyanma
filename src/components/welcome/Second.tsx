@@ -1,5 +1,3 @@
-import { defineComponent } from 'vue'
-import icon from '../../assets/icons/chart.svg'
 import s from './Welcome.module.scss'
 export const Second = () => {
     return (
