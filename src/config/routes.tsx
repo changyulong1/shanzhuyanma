@@ -17,10 +17,10 @@ export const routes = [
         component: welcome,
         children: [
             { path: '', redirect: '/welcome/1' },
-            { path: '1', components: { main: Forth, footer: ForthAction } },
-            { path: '2', components: { main: First, footer: FirstAction } },
-            { path: '3', components: { main: Second, footer: SecondAction } },
-            { path: '4', components: { main: Third, footer: ThirdAction } }
+            { path: '1', name: "Welcome1", components: { main: Forth, footer: ForthAction } },
+            { path: '2', name: "Welcome2", components: { main: First, footer: FirstAction } },
+            { path: '3', name: "Welcome3", components: { main: Second, footer: SecondAction } },
+            { path: '4', name: "Welcome4", components: { main: Third, footer: ThirdAction } }
         ]
     },
     { path: '/Start', component: StartPages },
