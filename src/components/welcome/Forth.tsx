@@ -5,7 +5,9 @@ export const Forth = () => {
     return (
         <div class={s.wrapper}>
             <div class={s.code}>
-                <img src={icon} alt="" />
+                <svg>
+                    <use xlinkHref='#clock'></use>
+                </svg>
                 <h2>会挣钱<br />还要会省钱</h2>
             </div>
         </div>
