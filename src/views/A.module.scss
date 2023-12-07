@@ -1,0 +1,16 @@
+.agg {
+    width: 100vw;
+    height: 100vh;
+    background: red;
+    padding: 0 20px;
+
+    >button {
+        width: 100%;
+        padding: 20px 0;
+        margin: 10px 0;
+    }
+
+    >p {
+        font-size: 30px;
+    }
+}

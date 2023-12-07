@@ -1,5 +1,5 @@
-import { defineComponent } from "vue";
-import { RouterLink, RouterView } from "vue-router";
+import { defineComponent, h, Transition, VNode } from "vue";
+import { RouteLocationNormalizedLoaded, RouterView } from "vue-router";
 import icon from '../assets/icons/mangosteen.svg'
 import s from './Welcome.module.scss'
 export const welcome = defineComponent({
@@ -10,7 +10,16 @@ export const welcome = defineComponent({
                     <img src={icon} />
                     <h1>山竹记账</h1>
                 </header>
-                <main><RouterView name="main" /></main>
+                <main class={s.main}>
+                    <RouterView name="main" >
+                        {({ Component: X, route: R }: { Component: VNode, route: RouteLocationNormalizedLoaded }) =>
+                            <Transition enterFromClass={s.slide_fade_enter_from} enterActiveClass={s.slide_fade_enter_active}
+                                leaveToClass={s.slide_fade_leave_to} leaveActiveClass={s.slide_fade_leave_active}>
+                                {X}
+                            </Transition>
+                        }
+                    </RouterView>
+                </main>
                 <footer>
                     <RouterView name="footer" />
                 </footer>

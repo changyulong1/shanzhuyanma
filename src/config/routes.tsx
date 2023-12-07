@@ -24,4 +24,5 @@ export const routes = [
         ]
     },
     { path: '/Start', component: StartPages },
+
 ]
