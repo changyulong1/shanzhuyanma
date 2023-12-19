@@ -8,6 +8,9 @@ import { ForthAction } from '../components/welcome/ForthAction'
 import { FirstAction } from '../components/welcome/FirstAction'
 import { SecondAction } from '../components/welcome/SecondAction'
 import { ThirdAction } from '../components/welcome/ThirdAction'
+import { ItemPage } from '../views/ItemPage'
+import { ItemList } from '../components/item/ItemList'
+import { ItemCreate } from '../components/item/ItemCreate'
 
 
 export const routes = [
@@ -24,5 +27,12 @@ export const routes = [
         ]
     },
     { path: '/Start', component: StartPages },
+    {
+        path: '/items', component: ItemPage,
+        children: [
+            { path: '', component: ItemList },
+            { path: 'create', component: ItemCreate },
+        ]
+    }
 
 ]
