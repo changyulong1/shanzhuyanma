@@ -1,12 +1,9 @@
 import { defineComponent } from 'vue'
-import { Navbar } from '../shared/Navbar'
+import { RouterView } from 'vue-router'
 export const ItemPage = defineComponent({
     setup(props, context) {
         return () => (
-            <div>
-                hai
-            </div>
-
+            <RouterView />
         )
     }
 })
