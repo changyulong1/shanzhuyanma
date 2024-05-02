@@ -1,12 +1,14 @@
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { Icon } from '../../shared/Icon'
 import { time } from '../../shared/time'
+import { DatetimePicker, NumberKeyboard, Popup } from 'vant';
 
 import s from './InputPad.module.scss'
 
 export const InputPad = defineComponent({
-
     setup() {
+        const now = new Date()
+        const refDate = ref<Date>(now)
         const buttons = [
             { text: '1', onclick: () => { } },
             { text: '2', onclick: () => { } },
@@ -26,12 +28,25 @@ export const InputPad = defineComponent({
             { text: '确定', onclick: () => { } },
 
         ]
+        const refDatePickerVisible = ref(false)
+        const showDatePicker = () => refDatePickerVisible.value = true
+        const hideDatePicker = () => refDatePickerVisible.value = false
+        const setDate = (date: Date) => { refDate.value = date; hideDatePicker() }
+        const refAmount = ref('0')
         return () => (
             <div class={s.inputPad}>
                 <div class={s.dateAndMount}>
                     <span class={s.date}>
                         <Icon name="day" class={s.icon}></Icon>
-                        <span><input type="date" value={time().format('YYYY-MM-DD')} /></span>
+                        <span>
+                            <span onClick={showDatePicker}>{time(refDate.value).format()}</span>
+                            <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
+                                <DatetimePicker value={refDate.value} type="date" title="选择年月日"
+                                    onConfirm={setDate} onCancel={hideDatePicker}
+                                />
+                            </Popup>
+
+                        </span>
                     </span>
                     <span class={s.amount}>1231</span>
                 </div>
