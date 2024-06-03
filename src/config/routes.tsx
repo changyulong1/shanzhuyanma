@@ -11,6 +11,9 @@ import { ThirdAction } from '../components/welcome/ThirdAction'
 import { ItemPage } from '../views/ItemPage'
 import { ItemList } from '../components/item/ItemList'
 import { ItemCreate } from '../components/item/ItemCreate'
+import { TagPages } from '../views/TagPages'
+import { TagCreate } from '../components/tag/TagCrate'
+import { TagEdit } from '../components/tag/TagEdit'
 
 
 export const routes = [
@@ -32,6 +35,13 @@ export const routes = [
         children: [
             { path: '', component: ItemList },
             { path: 'create', component: ItemCreate },
+        ]
+    },
+    {
+        path: '/tags', component: TagPages,
+        children: [
+            { path: 'create', component: TagCreate },
+            { path: 'id', component: TagEdit }
         ]
     }
 

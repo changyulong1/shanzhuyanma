@@ -3,13 +3,12 @@
     --welcome-text: white;
     --welcome-bg-start: #5d33be;
     --welcome-bg-end: #8f4cd7;
-    --button-bg-color: #5d33be;
     --welcome-nav-height: 64px;
     --welcome-nav-gap: 8px;
     --z-index-bottom-nav: 8;
     --z-index-overlay: 16;
     --transition-duration: 0.5s;
-    --button-bg: #5C33BE;
+    --button-bg-color: #5C33BE;
     --button-text: white;
     --button-font-size: 18px;
     --button-radius: 8px;
@@ -31,5 +30,11 @@
     --button-bg: white;
     --button-bg-important: #5C33BE;
     --button-text-important: white;
-
+    --input-border-color: #5c33be;
+    --input-min-height: 48px;
+    --input-radius: var(--button-radius);
+    --input-shadow: rgba(0, 0, 0, 0.25);
+    --error-color: #E10505;
+    --emoji-nav-text-selected: #333;
+    --emoji-nav-text: #999;
 }
