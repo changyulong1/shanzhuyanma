@@ -1,4 +1,4 @@
-import { computed, defineComponent, PropType, ref } from 'vue'
+import { computed, defineComponent, PropType, ref } from 'vue';
 import { emojiList } from './emojiList';
 import s from './EmojiList.module.scss'
 export const EmojiSelect = defineComponent({
@@ -7,7 +7,7 @@ export const EmojiSelect = defineComponent({
             type: String
         }
     },
-    setup(props, context) {
+    setup: (props, context) => {
         const refSelected = ref(1)
         const table: [string, string[]][] = [
             ['表情', ['face-smiling', 'face-affection', 'face-tongue', 'face-hand',
@@ -32,25 +32,23 @@ export const EmojiSelect = defineComponent({
         const onClickTab = (index: number) => {
             refSelected.value = index
         }
-        const onClickEmoji = (emoji: String) => {
+        const onClickEmoji = (emoji: string) => {
             context.emit('update:modelValue', emoji)
         }
         const emojis = computed(() => {
-            const selectedTime = table[refSelected.value][1]
-            return selectedTime.map((category) => {
-                return emojiList.find(time => time[0] == category)?.[1]
+            const selectedItem = table[refSelected.value][1]
+            return selectedItem.map(category =>
+                emojiList.find(item => item[0] === category)?.[1]
                     .map(item => <li class={item === props.modelValue ? s.selectedEmoji : ''}
                         onClick={() => onClickEmoji(item)}>{item}</li>)
-            })
+            )
         })
         return () => (
             <div class={s.emojiList}>
                 <nav>
-                    {table.map((time, index) => {
-                        return <span class={index === refSelected.value ? s.selected : ''}
-                            onClick={() => onClickTab(index)}>{time[0]}</span>
-                    })
-                    }
+                    {table.map((item, index) =>
+                        <span class={index === refSelected.value ? s.selected : ''}
+                            onClick={() => onClickTab(index)}>{item[0]}</span>)}
                 </nav>
                 <ol>
                     {emojis.value}
