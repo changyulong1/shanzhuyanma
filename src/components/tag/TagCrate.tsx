@@ -1,10 +1,16 @@
-import { defineComponent } from 'vue'
+import { defineComponent, reactive } from 'vue'
 import { MainLayout } from '../../layouts/MainLayout'
 import { Button } from '../../shared/Button'
+import { EmojiSelect } from '../../shared/EmojiSelect'
 import { Icon } from '../../shared/Icon'
 import s from './TagCreate.module.scss'
 export const TagCreate = defineComponent({
+
     setup() {
+        const formData = reactive({
+            name: '',
+            sign: 'x',
+        })
         return () => (
             <MainLayout>
                 {{
@@ -25,158 +31,9 @@ export const TagCreate = defineComponent({
                             </div>
                             <div class={s.formRow}>
                                 <label class={s.formLabel}>
-                                    <span class={s.formItem_name}>符号 </span>
+                                    <span class={s.formItem_name}>符号:{formData.sign} </span>
                                     <div class={s.formItem_value}>
-                                        <div class={s.emojiList}>
-                                            <nav>
-                                                <span>手势</span>
-                                                <span>人物</span>
-                                                <span>衣服</span>
-                                                <span>动物</span>
-                                                <span>植物</span>
-                                                <span>自然</span>
-                                                <span>食物</span>
-                                                <span>动物</span>
-                                                <span>衣服</span>
-                                                <span>动物</span>
-                                                <span>植物</span>
-                                                <span>自然</span>
-                                                <span>食物</span>
-                                                <span>动物</span>
-                                            </nav>
-                                            <ol>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-                                                <li>😉</li>
-
-                                            </ol>
-                                        </div>
+                                        <EmojiSelect v-model={formData.sign} />
                                     </div>
                                     <div class={s.formItem_errorHint}>
                                         <span>必填</span>
