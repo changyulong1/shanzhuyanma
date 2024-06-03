@@ -9,19 +9,46 @@ export const InputPad = defineComponent({
     setup() {
         const now = new Date()
         const refDate = ref<Date>(now)
+        const appendText = (n: number | String) => {
+            let nString = n.toString()
+            let index = refAmount.value.indexOf('.')
+            if (refAmount.value.length > 13) { //设置输入长度
+                return
+            }
+            if (index >= 0 && refAmount.value.length - index > 2) { // 设置两位小数
+                return
+            }
+            if (nString == '.') {
+                if (index >= 0) { // 有小数点
+                    return
+                }
+            } else if (nString == '0') {
+                if (index === -1) { //没有小数点
+                    if (refAmount.value === '0') {
+                        return
+                    }
+                }
+            } else {
+                if (refAmount.value === '0') {
+                    refAmount.value = ' '
+                }
+            }
+
+            refAmount.value += n.toString()
+        }
         const buttons = [
-            { text: '1', onclick: () => { } },
-            { text: '2', onclick: () => { } },
-            { text: '3', onclick: () => { } },
-            { text: '4', onclick: () => { } },
-            { text: '5', onclick: () => { } },
-            { text: '6', onclick: () => { } },
-            { text: '7', onclick: () => { } },
-            { text: '8', onclick: () => { } },
-            { text: '9', onclick: () => { } },
-            { text: '.', onclick: () => { } },
-            { text: '0', onclick: () => { } },
-            { text: '删除', onclick: () => { } },
+            { text: '1', onclick: () => { appendText(1) } },
+            { text: '2', onclick: () => { appendText(2) } },
+            { text: '3', onclick: () => { appendText(3) } },
+            { text: '4', onclick: () => { appendText(4) } },
+            { text: '5', onclick: () => { appendText(5) } },
+            { text: '6', onclick: () => { appendText(6) } },
+            { text: '7', onclick: () => { appendText(7) } },
+            { text: '8', onclick: () => { appendText(8) } },
+            { text: '9', onclick: () => { appendText(9) } },
+            { text: '.', onclick: () => { appendText('.') } },
+            { text: '0', onclick: () => { appendText(0) } },
+            { text: '删除', onclick: () => { refAmount.value = '0' } },
             { text: '确定', onclick: () => { } },
 
         ]
@@ -42,10 +69,9 @@ export const InputPad = defineComponent({
                                     onConfirm={setDate} onCancel={hideDatePicker}
                                 />
                             </Popup>
-
                         </span>
                     </span>
-                    <span class={s.amount}>1231</span>
+                    <span class={s.amount}>{refAmount.value}</span>
                 </div>
                 <div class={s.buttons}>
                     {
