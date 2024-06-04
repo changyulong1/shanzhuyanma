@@ -5,7 +5,7 @@ import { EmojiSelect } from '../../shared/EmojiSelect'
 import { Icon } from '../../shared/Icon'
 import { Rules, validate } from '../../shared/validate'
 
-import s from './TagEdit.module.scss'
+import s from './Tag.module.scss'
 export const TagEdit = defineComponent({
 
     setup(props, context) {
