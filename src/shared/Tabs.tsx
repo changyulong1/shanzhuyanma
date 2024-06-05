@@ -13,6 +13,7 @@ export const Tabs = defineComponent({
             type: Function as PropType<(name: string) => void>,
             required: false,
         }
+
     },
 
     setup(props, context) {
