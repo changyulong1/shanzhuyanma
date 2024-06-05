@@ -1,7 +1,6 @@
 import { defineComponent, reactive } from 'vue'
 import { MainLayout } from '../../layouts/MainLayout'
 import { Button } from '../../shared/Button'
-import { EmojiSelect } from '../../shared/EmojiSelect'
 import { Icon } from '../../shared/Icon'
 import { TagFrom } from '../../shared/TagForm'
 import { Rules, validate } from '../../shared/validate'
