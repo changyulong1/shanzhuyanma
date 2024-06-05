@@ -14,7 +14,7 @@
     --button-radius: 8px;
     --button-height: 48px;
     --float-button-text: white;
-    --float-button-bg: var(--button-bg);
+    --float-button-bg: var(--button-bg-color);
     --navbar-bg-start: var(--welcome-bg-start);
     --navbar-bg-end: var(--welcome-bg-end);
     --navbar-text: white;
@@ -40,5 +40,13 @@
     --main: #5c33be;
     --tag-bg: #EFEFEF;
     --button-bg-danger: #E10505;
+    --list-tag-text: #333;
+    --list-amount-text: var(--amount-text);
+    --list-time-text: var(--date-text);
+    --main: #5c33be;
+    --total-bg: #252A43;
+    --total-text: white;
+    --total-income: #FE7275;
+    --total-expenses: #53A867;
 
 }
