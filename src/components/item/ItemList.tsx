@@ -6,6 +6,7 @@ import { Tab, Tabs } from '../../shared/Tabs'
 import { Time } from '../../shared/time'
 import s from './ItemList.module.scss'
 import { ItemSummary } from './ItemSummary'
+import { Form, FormItem } from '../../shared/Form';
 export const ItemList = defineComponent({
     setup(props, context) {
         const refSelected = ref('本月')
@@ -63,14 +64,10 @@ export const ItemList = defineComponent({
                                     请选择时间
                                 </header>
                                 <main>
-                                    <form>
-                                        <div>
-
-                                        </div>
-                                        <div>
-
-                                        </div>
-                                    </form>
+                                    <Form>
+                                        <FormItem label='开始时间' type='text' />
+                                        <FormItem label='结束时间' type='text' />
+                                    </Form>
                                 </main>
                             </div>
                         </Overlay>

@@ -4,7 +4,10 @@ import s from './EmojiList.module.scss'
 export const EmojiSelect = defineComponent({
     props: {
         modelValue: {
-            type: String
+            type: String as PropType<String>
+        },
+        onUpdateModelValue: {
+            type: Function as PropType<(emoji: String) => void>
         }
     },
     setup: (props, context) => {
@@ -33,7 +36,12 @@ export const EmojiSelect = defineComponent({
             refSelected.value = index
         }
         const onClickEmoji = (emoji: string) => {
-            context.emit('update:modelValue', emoji)
+            if (props.onUpdateModelValue) {
+                props.onUpdateModelValue(emoji)
+            } else {
+                context.emit('update:modelValue', emoji)
+            }
+
         }
         const emojis = computed(() => {
             const selectedItem = table[refSelected.value][1]
