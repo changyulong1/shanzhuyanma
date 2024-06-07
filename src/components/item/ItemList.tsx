@@ -7,6 +7,7 @@ import { Time } from '../../shared/time'
 import s from './ItemList.module.scss'
 import { ItemSummary } from './ItemSummary'
 import { Form, FormItem } from '../../shared/Form';
+import { OverlayIcon } from '../../shared/Overlay';
 export const ItemList = defineComponent({
     setup(props, context) {
         const refSelected = ref('本月')
@@ -16,13 +17,6 @@ export const ItemList = defineComponent({
             start: new Time().format(),
             end: new Time().format()
         })
-        // watchEffect(() => {
-        //     if (refSelected.value === '自定义时间') {
-        //         console.log(555)
-        //         refOverlayVisible.value = true
-        //     }
-        // })
-
         const onSelect = (value: string) => {
             if (value === '自定义时间') {
                 console.log(555)
@@ -47,7 +41,7 @@ export const ItemList = defineComponent({
             <MainLayout>
                 {{
                     title: () => '山竹记账',
-                    icon: () => <Icon name='menu' onClick={() => { }} />,
+                    icon: () => <OverlayIcon />,
                     default: () => <>
                         <Tabs classPrefix='customTabs' v-model:selected={refSelected.value}
                             onUpdate:selected={onSelect}
