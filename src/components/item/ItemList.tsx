@@ -7,6 +7,7 @@ import { Time } from '../../shared/time'
 import s from './ItemList.module.scss'
 import { ItemSummary } from './ItemSummary'
 import { Form, FormItem } from '../../shared/Form';
+import { Button } from '../../shared/Button';
 export const ItemList = defineComponent({
     setup(props, context) {
         const refSelected = ref('本月')
@@ -65,6 +66,13 @@ export const ItemList = defineComponent({
                                 <main>
                                     <Form>
                                         <FormItem label='开始时间' v-model={customTime.start} type='date' />
+                                        <FormItem label='开始时间' v-model={customTime.end} type='date' />
+                                    </Form>
+                                    <Form>
+                                        <div class={s.actions}>
+                                            <button type='button'>取消</button>
+                                            <button type='button'>确定</button>
+                                        </div>
                                     </Form>
                                 </main>
                             </div>
