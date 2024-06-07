@@ -28,15 +28,22 @@ export const TagFrom = defineComponent({
         }
         return () => (
             <Form onSubmit={onSubmit}>
-                <FormItem v-model={formData.name} type='text' label='标签名' error={errors['name'] ? errors['name'][0] : '　'}></FormItem>
-                <FormItem type='emojiSelect' v-model={formData.sign} label={'符号' + formData.sign} error={errors['sign'] ? errors['sign'][0] : '　'}></FormItem>
+                <FormItem
+                    v-model={formData.name}
+                    type='text' label='标签名'
+                    error={errors['name']?.[0]}></FormItem>
+                <FormItem
+                    type='emojiSelect'
+                    v-model={formData.sign}
+                    label={'符号' + formData.sign}
+                    error={errors['sign']?.[0]}></FormItem>
                 <FormItem>
                     <p class={s.tips}>记账时长按标签即可进行编辑</p>
                 </FormItem>
                 <FormItem>
                     <Button class={[s.button]}>确定</Button>
                 </FormItem>
-            </Form>
+            </Form >
         )
     }
 })

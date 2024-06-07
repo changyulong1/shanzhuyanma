@@ -33,9 +33,20 @@
 
     &_value {
         display: flex;
-        justify-content: center;
-        align-items: center;
         margin-top: 4px;
+
+        &>* {
+            flex-grow: 1;
+        }
+    }
+
+    &.validationCodeInput {
+        flex-grow: 0;
+        width: 9em;
+    }
+
+    &.validationCodeButton {
+        margin-left: 16px;
     }
 
     &_errorHint {
