@@ -13,12 +13,11 @@ export const ItemList = defineComponent({
         const time = new Time()
         const refOverlayVisible = ref(false)
         const customTime = reactive({
-            start: new Time(),
-            end: new Time()
+            start: new Time().format(),
+            end: new Time().format()
         })
         watchEffect(() => {
             if (refSelected.value === '自定义时间') {
-                console.log(666)
                 refOverlayVisible.value = true
             }
         })
@@ -54,8 +53,8 @@ export const ItemList = defineComponent({
                             </Tab>
                             <Tab name='自定义时间' >
                                 <ItemSummary
-                                    startDate={customTime.start.format()}
-                                    endDate={customTime.end.format()} />
+                                    startDate={customTime.start}
+                                    endDate={customTime.end} />
                             </Tab>
                         </Tabs>
                         <Overlay show={refOverlayVisible.value} class={s.overlay} >
@@ -65,8 +64,7 @@ export const ItemList = defineComponent({
                                 </header>
                                 <main>
                                     <Form>
-                                        <FormItem label='开始时间' type='text' />
-                                        <FormItem label='结束时间' type='text' />
+                                        <FormItem label='开始时间' v-model={customTime.start} type='date' />
                                     </Form>
                                 </main>
                             </div>
