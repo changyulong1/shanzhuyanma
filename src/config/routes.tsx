@@ -15,6 +15,7 @@ import { TagPages } from '../views/TagPages'
 import { TagCreate } from '../components/tag/TagCrate'
 import { TagEdit } from '../components/tag/TagEdit'
 import { SignInPage } from '../views/SignInPage'
+import { StatisticsPage } from '../views/StatisticsPage'
 
 
 export const routes = [
@@ -47,6 +48,9 @@ export const routes = [
     },
     {
         path: '/sign_in', component: SignInPage
+    },
+    {
+        path: '/statistics', component: StatisticsPage
     }
 
 ]
