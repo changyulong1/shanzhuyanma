@@ -7,7 +7,6 @@ import { Time } from '../../shared/time'
 import s from './ItemList.module.scss'
 import { ItemSummary } from './ItemSummary'
 import { Form, FormItem } from '../../shared/Form';
-import { Button } from '../../shared/Button';
 export const ItemList = defineComponent({
     setup(props, context) {
         const refSelected = ref('本月')
@@ -17,11 +16,12 @@ export const ItemList = defineComponent({
             start: new Time().format(),
             end: new Time().format()
         })
-        watchEffect(() => {
-            if (refSelected.value === '自定义时间') {
-                refOverlayVisible.value = true
-            }
-        })
+        // watchEffect(() => {
+        //     if (refSelected.value === '自定义时间') {
+        //         console.log(555)
+        //         refOverlayVisible.value = true
+        //     }
+        // })
         const timeList = [
             {
                 start: time.firstDayOfMonth(),
@@ -42,7 +42,9 @@ export const ItemList = defineComponent({
                     title: () => '山竹记账',
                     icon: () => <Icon name='menu' onClick={() => { }} />,
                     default: () => <>
-                        <Tabs classPrefix='customTabs' v-model:selected={refSelected.value}>
+                        <Tabs classPrefix='customTabs' v-model:selected={refSelected.value}
+                            onUpdate:selected={() => { refOverlayVisible.value = true }}
+                        >
                             <Tab name='本月'>
                                 <ItemSummary startDate={timeList[0].start.format()} endDate={timeList[0].end.format()} />
                             </Tab>
@@ -58,7 +60,8 @@ export const ItemList = defineComponent({
                                     endDate={customTime.end} />
                             </Tab>
                         </Tabs>
-                        <Overlay show={refOverlayVisible.value} class={s.overlay} >
+                        <Overlay show={refOverlayVisible.value} class={s.overlay}
+                        >
                             <div class={s.overlay_inner}>
                                 <header>
                                     请选择时间
