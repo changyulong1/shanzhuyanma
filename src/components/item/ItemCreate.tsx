@@ -61,7 +61,7 @@ export const ItemCreate = defineComponent({
         return () => (
             <MainLayout>
                 {{
-                    title: () => '山竹记账',
+                    title: () => '记一笔',
                     icon: () => <Icon name='left' class={s.navIcon}></Icon>,
                     default: () => <>
                         <div class={s.wrapper}>

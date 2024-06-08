@@ -26,6 +26,9 @@ export const SignInPage = defineComponent({
                 { key: 'code', type: 'required', message: '必填' },
             ]))
         }
+        const axiosHttp = () => {
+            console.log(5555)
+        }
         return () => <>
             <MainLayout>
                 {{
@@ -41,13 +44,11 @@ export const SignInPage = defineComponent({
                                 <FormItem label="邮箱地址" type="text"
                                     placeholder='请输入邮箱，然后点击发送验证码'
                                     v-model={formData.email} error={errors.email?.[0]} />
-                                <FormItem label="验证码" type="validationCode"
+                                <FormItem onClick={axiosHttp} label="验证码" type="validationCode"
                                     placeholder='请输入六位数字'
                                     v-model={formData.code} error={errors.code?.[0]} />
                                 <FormItem style={{ paddingTop: '96px' }}>
-                                    <Button>登录</Button>
-                                </FormItem>
-                                <FormItem style={{ paddingTop: '96px' }}>
+                                    <Button type='submit' onClick={axiosHttp}>登录</Button>
                                 </FormItem>
                             </Form>
                         </div>
