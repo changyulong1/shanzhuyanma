@@ -6,6 +6,10 @@
     border-radius: var(--button-radius);
     color: var(--button-text);
 
+    &[disabled] {
+        background: var(--bar-bg);
+    }
+
     &.normal {}
 
     &.important {}

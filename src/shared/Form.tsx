@@ -45,6 +45,20 @@ export const FormItem = defineComponent({
     emits: ['update:modelValue'],
     setup(props, context) {
         const refDateVisible = ref(false)
+        let inShow = ref(false)
+        let cont = ref<number>(5)
+        const onClick = () => {
+            inShow.value = true
+            const time = setInterval(() => {
+                cont.value--
+                console.log(cont)
+                if (cont.value === 0) {
+                    clearInterval(time)
+                    inShow.value = false
+                    cont.value = 5
+                }
+            }, 1000)
+        }
         const content = computed(() => {
             switch (props.type) {
                 case 'text':
@@ -80,8 +94,8 @@ export const FormItem = defineComponent({
                     return <>
                         <input class={[s.formItem, s.input, s.validationCodeInput]}
                             placeholder={props.placeholder} />
-                        <Button onClick={props.onClick} class={[s.formItem, s.button, s.validationCodeButton]}>
-                            发送验证码
+                        <Button disabled={inShow.value} onClick={onClick} class={[s.formItem, s.button, s.validationCodeButton]}>
+                            {inShow.value ? cont.value : '发送验证码'}
                         </Button>
                     </>
                 case 'select':
