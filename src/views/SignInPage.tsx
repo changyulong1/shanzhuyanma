@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { defineComponent, reactive } from 'vue'
 import { MainLayout } from '../layouts/MainLayout'
 import { Button } from '../shared/Button'
@@ -8,7 +9,7 @@ import s from './SignInPage.module.scss'
 export const SignInPage = defineComponent({
     setup(props, context) {
         const formData = reactive({
-            email: '',
+            email: '2725546002@qq.com',
             code: ''
         })
         const errors = reactive({
@@ -26,8 +27,9 @@ export const SignInPage = defineComponent({
                 { key: 'code', type: 'required', message: '必填' },
             ]))
         }
-        const axiosHttp = () => {
-            console.log(5555)
+        const axiosHttp = async () => {
+            const response = await axios.post('/api/v1/validation_codes', { email: formData.email })
+            console.log(response)
         }
         return () => <>
             <MainLayout>
