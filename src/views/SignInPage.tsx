@@ -11,7 +11,7 @@ export const SignInPage = defineComponent({
     setup(props, context) {
 
         const formData = reactive({
-            email: '2725546002@qq.com',
+            email: '272554600',
             code: ''
         })
         const errors = reactive({
@@ -30,7 +30,7 @@ export const SignInPage = defineComponent({
             ]))
         }
         const onError = (error: any) => {
-            console.log(2)
+            console.log(error.response.data.errors)
             if (error.response.status === 422) {
                 Object.assign(errors, error.response.data.errors)
             }
@@ -39,13 +39,9 @@ export const SignInPage = defineComponent({
         const refValidationCode = ref<any>()
         const onClickSendValidationCode = async () => {
 
-            // const res = await axios.post('/api/v1/validation_codes', { email: formData.email })
-            //     .then((res) => {
-            //         console.log(22)
-            //     }).catch(() => {
-            //         console.log(666)
-            //     })
-
+            const response = await http
+                .post('/validation_codes', { email: formData.email })
+                .catch(onError)
             //成功
             refValidationCode.value.startCount()
         }

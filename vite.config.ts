@@ -22,7 +22,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/v1': {
-        target: 'http://123.57.27.189:3000/',
+        target: 'https://mangosteen2.hunger-valley.com/',
+        changeOrigin: true
       }
     }
   }

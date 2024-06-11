@@ -26,16 +26,16 @@ export class Http {
 }
 export const http = new Http('/api/v1')
 
-// http.instance.interceptors.response.use(response => {
-//     console.log('response')
-//     console.log(222)
-//     return response
-// }, (error) => {
-//     if (error.response) {
-//         const axiosError = error as AxiosError
-//         if (axiosError.response?.status === 426) {
-//             alert('你太频繁了')
-//         }
-//     }
-//     throw error
-// })
+http.instance.interceptors.response.use(response => {
+    console.log('response')
+    return response
+}, (error) => {
+    if (error.response) {
+        console.log('error 有错误')
+        const axiosError = error as AxiosError
+        if (axiosError.response?.status === 426) {
+            alert('你太频繁了')
+        }
+    }
+    throw error
+})
