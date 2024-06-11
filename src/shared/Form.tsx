@@ -1,4 +1,4 @@
-import { computed, defineComponent, PropType, ref } from 'vue'
+import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
 import { EmojiSelect } from './EmojiSelect'
 import { Time } from './time'
 import s from './Form.module.scss'
@@ -39,26 +39,30 @@ export const FormItem = defineComponent({
         options: Array as PropType<Array<{ value: string, text: string }>>,
         onClick: {
             type: Function as PropType<() => void>
+        },
+        countFrom: {
+            type: Number,
+            default: 5
         }
 
     },
     emits: ['update:modelValue'],
     setup(props, context) {
         const refDateVisible = ref(false)
-        let inShow = ref(false)
-        let cont = ref<number>(5)
-        const onClick = () => {
-            inShow.value = true
-            const time = setInterval(() => {
-                cont.value--
-                console.log(cont)
-                if (cont.value === 0) {
-                    clearInterval(time)
-                    inShow.value = false
-                    cont.value = 5
+        const timer = ref<number>()
+        const count = ref<number>(props.countFrom)
+        const isCounting = computed(() => !!timer.value)
+        const startCount = () => {
+            timer.value = setInterval(() => {
+                count.value -= 1
+                if (count.value === 0) {
+                    clearInterval(timer.value)
+                    timer.value = undefined
+                    count.value = props.countFrom
                 }
             }, 1000)
         }
+        context.expose({ startCount })
         const content = computed(() => {
             switch (props.type) {
                 case 'text':
@@ -94,8 +98,8 @@ export const FormItem = defineComponent({
                     return <>
                         <input class={[s.formItem, s.input, s.validationCodeInput]}
                             placeholder={props.placeholder} />
-                        <Button disabled={inShow.value} onClick={onClick} class={[s.formItem, s.button, s.validationCodeButton]}>
-                            {inShow.value ? cont.value : '发送验证码'}
+                        <Button disabled={isCounting.value} onClick={props.onClick} class={[s.formItem, s.button, s.validationCodeButton]}>
+                            {isCounting.value ? `${count.value}秒后可重新发送` : '发送验证码'}
                         </Button>
                     </>
                 case 'select':
