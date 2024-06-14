@@ -16,13 +16,16 @@ import { TagCreate } from '../components/tag/TagCrate'
 import { TagEdit } from '../components/tag/TagEdit'
 import { SignInPage } from '../views/SignInPage'
 import { StatisticsPage } from '../views/StatisticsPage'
+import { RouteRecordRaw } from 'vue-router'
 
-
-export const routes = [
+export const routes: RouteRecordRaw[] = [
     { path: '/', redirect: '/welcome' },
     {
         path: '/welcome',
         component: welcome,
+        beforeEnter: (to, from, next) => {
+            localStorage.getItem('skipFeatures') === 'yes' ? next('/start') : next()
+        },
         children: [
             { path: '', redirect: '/welcome/1' },
             { path: '1', name: "Welcome1", components: { main: Forth, footer: ForthAction } },
