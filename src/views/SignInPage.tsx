@@ -12,14 +12,14 @@ export const SignInPage = defineComponent({
     setup(props, context) {
 
         const formData = reactive({
-            email: '853044623@qq.com',
+            email: '',
             code: ''
         })
         const errors = reactive({
             email: [],
             code: []
         })
-        const onSubmit = (e: Event) => {
+        const onSubmit = async (e: Event) => {
             e.preventDefault()
             Object.assign(errors, {
                 email: [], code: []
@@ -29,6 +29,9 @@ export const SignInPage = defineComponent({
                 { key: 'email', type: 'pattern', regex: /.+@.+/, message: '必须是邮箱地址' },
                 { key: 'code', type: 'required', message: '必填' },
             ]))
+            console.log(formData)
+            const response = await http.post('/session', formData)
+
         }
         const onError = (error: any) => {
             if (error.response.status === 422) {
@@ -40,6 +43,7 @@ export const SignInPage = defineComponent({
         const refValidationCode = ref<any>()
         const onClickSendValidationCode = async () => {
             disabled()
+            console.log(formData.email)
             const response = await http
                 .post('/validation_codes', { email: formData.email })
                 .catch(onError)
@@ -58,18 +62,19 @@ export const SignInPage = defineComponent({
                                 <Icon class={s.icon} name="mangosteen" />
                                 <h1 class={s.appName}>山竹记账</h1>
                             </div>
+                            <span>测试{formData.code}</span>
                             <Form onSubmit={onSubmit}>
                                 <FormItem label="邮箱地址" type="text"
                                     placeholder='请输入邮箱，然后点击发送验证码'
                                     v-model={formData.email} error={errors.email?.[0]} />
                                 <FormItem ref={refValidationCode} label="验证码" type="validationCode"
                                     placeholder='请输入六位数字'
-                                    countFrom={20}
+                                    countFrom={60}
                                     disabled={refDisabled.value}
                                     onClick={onClickSendValidationCode}
                                     v-model={formData.code} error={errors.code?.[0]} />
                                 <FormItem style={{ paddingTop: '96px' }}>
-                                    <Button type='submit' onClick={onClickSendValidationCode}>登录</Button>
+                                    <Button type='submit'>登录</Button>
                                 </FormItem>
                             </Form>
                         </div>

@@ -7,19 +7,19 @@ export class Http {
             baseURL,
         })
     }
-    //read
+    // read
     get<R = unknown>(url: string, query?: Record<string, string>, config?: Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>) {
         return this.instance.request<R>({ ...config, url: url, params: query, method: 'get' })
     }
-    //create
+    // create
     post<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>) {
         return this.instance.request<R>({ ...config, url, data, method: 'post' })
     }
-    //update
+    // update
     patch<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: Omit<AxiosRequestConfig, 'url' | 'data'>) {
         return this.instance.request<R>({ ...config, url, data, method: 'patch' })
     }
-    //destroy
+    // destroy
     delete<R = unknown>(url: string, query?: Record<string, string>, config?: Omit<AxiosRequestConfig, 'params'>) {
         return this.instance.request<R>({ ...config, url: url, params: query, method: 'delete' })
     }
