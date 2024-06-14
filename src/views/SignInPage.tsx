@@ -6,7 +6,7 @@ import { Button } from '../shared/Button'
 import { Form, FormItem } from '../shared/Form'
 import { http } from '../shared/http'
 import { Icon } from '../shared/Icon'
-import { validate } from '../shared/validate'
+import { hasError, validate } from '../shared/validate'
 import s from './SignInPage.module.scss'
 export const SignInPage = defineComponent({
     setup(props, context) {
@@ -29,8 +29,9 @@ export const SignInPage = defineComponent({
                 { key: 'email', type: 'pattern', regex: /.+@.+/, message: '必须是邮箱地址' },
                 { key: 'code', type: 'required', message: '必填' },
             ]))
-            console.log(formData)
-            const response = await http.post('/session', formData)
+            if (!hasError(errors)) {
+                const response = await http.post('/session', formData)
+            }
 
         }
         const onError = (error: any) => {
