@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { defineComponent, reactive, ref } from 'vue'
+import { useBool } from '../hooks/useBool'
 import { MainLayout } from '../layouts/MainLayout'
 import { Button } from '../shared/Button'
 import { Form, FormItem } from '../shared/Form'
@@ -11,7 +12,7 @@ export const SignInPage = defineComponent({
     setup(props, context) {
 
         const formData = reactive({
-            email: '272554600',
+            email: '853044623@qq.com',
             code: ''
         })
         const errors = reactive({
@@ -30,18 +31,19 @@ export const SignInPage = defineComponent({
             ]))
         }
         const onError = (error: any) => {
-            console.log(error.response.data.errors)
             if (error.response.status === 422) {
                 Object.assign(errors, error.response.data.errors)
             }
             throw error
         }
+        const { ref: refDisabled, toggle, on: disabled, off: enable } = useBool(false)
         const refValidationCode = ref<any>()
         const onClickSendValidationCode = async () => {
-
+            disabled()
             const response = await http
                 .post('/validation_codes', { email: formData.email })
                 .catch(onError)
+                .finally(enable)
             //成功
             refValidationCode.value.startCount()
         }
@@ -63,6 +65,7 @@ export const SignInPage = defineComponent({
                                 <FormItem ref={refValidationCode} label="验证码" type="validationCode"
                                     placeholder='请输入六位数字'
                                     countFrom={20}
+                                    disabled={refDisabled.value}
                                     onClick={onClickSendValidationCode}
                                     v-model={formData.code} error={errors.code?.[0]} />
                                 <FormItem style={{ paddingTop: '96px' }}>
