@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { defineComponent, reactive, ref } from 'vue'
+import { routerKey, useRoute, useRouter } from 'vue-router'
 import { useBool } from '../hooks/useBool'
 import { MainLayout } from '../layouts/MainLayout'
 import { Button } from '../shared/Button'
@@ -19,6 +20,8 @@ export const SignInPage = defineComponent({
             email: [],
             code: []
         })
+        const router = useRouter()
+        const route = useRoute()
         const onSubmit = async (e: Event) => {
             e.preventDefault()
             Object.assign(errors, {
@@ -30,7 +33,10 @@ export const SignInPage = defineComponent({
                 { key: 'code', type: 'required', message: '必填' },
             ]))
             if (!hasError(errors)) {
-                const response = await http.post('/session', formData)
+                const response = await http.post<{ jwt: string }>('/session', formData)
+                console.log(response.data)
+                localStorage.setItem('jwt', response.data.jwt)
+                router.push('/')
             }
 
         }
