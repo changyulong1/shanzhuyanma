@@ -17,5 +17,11 @@ type Tag = {
     kind: expenses | income
 }
 type Resources<T = any> = {
-    resources: T[]
+    resources: T[],
+    pager: {
+        page: number,
+        per_page: number,
+        count: number
+    }
+
 }

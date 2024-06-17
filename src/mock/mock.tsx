@@ -11,59 +11,35 @@ export const mockSession: Mock = (config) => {
     }]
 }
 export const mockTagIndex: Mock = (config) => {
-    if (config.params.kind === 'expenses') {
-        return [200, {
-            resources: [
-                { id: 1, name: '餐费', sign: '￥', kind: 'expenses' },
-                { id: 2, name: '打车', sign: '￥', kind: 'expenses' },
-                { id: 3, name: '聚餐', sign: '￥', kind: 'expenses' },
-                { id: 4, name: '打车', sign: '￥', kind: 'expenses' },
-                { id: 5, name: '聚餐', sign: '￥', kind: 'expenses' },
-                { id: 6, name: '打车', sign: '￥', kind: 'expenses' },
-                { id: 7, name: '聚餐', sign: '￥', kind: 'expenses' },
-            ]
-        }]
-    } else {
-        return [200,
-            {
-                resources: [
-                    { id: 4, name: '工资', sign: '￥', kind: 'income' },
-                    { id: 5, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 6, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 11, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 18, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 17, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 19, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 4, name: '工资', sign: '￥', kind: 'income' },
-                    { id: 5, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 6, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 11, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 18, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 17, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 19, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 4, name: '工资', sign: '￥', kind: 'income' },
-                    { id: 5, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 6, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 11, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 18, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 17, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 19, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 4, name: '工资', sign: '￥', kind: 'income' },
-                    { id: 5, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 6, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 11, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 18, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 17, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 19, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 4, name: '工资', sign: '￥', kind: 'income' },
-                    { id: 5, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 6, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 11, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 18, name: '滴滴', sign: '￥', kind: 'income' },
-                    { id: 17, name: '彩票', sign: '￥', kind: 'income' },
-                    { id: 19, name: '滴滴', sign: '￥', kind: 'income' },
-                ]
-            }]
+    const { kind, page } = config.params
+    const per_page = 25
+    const count = 26
+    let id = 0
+    const createId = () => {
+        id += 1
+        return id
     }
-
+    const createPaper = (page = 1) => ({
+        page, per_page, count
+    })
+    const createTag = (n = 1, attrs?: any) =>
+        Array.from({ length: n }).map(() => ({
+            id: createId(),
+            name: faker.lorem.word(),
+            sign: faker.internet.emoji(),
+            kind: config.params.kind,
+            ...attrs
+        }))
+    const createBody = (n = 1, attrs?: any) => ({
+        resources: createTag(n), pager: createPaper(page)
+    })
+    if (kind === 'expenses' && (page === 1 || !page)) {
+        return [200, createBody(25)]
+    } else if (kind === 'expenses' && page === 2) {
+        return [200, createBody(1)]
+    } else if (kind === 'income' && (page === 1 || !page)) {
+        return [200, createBody(5)]
+    } else {
+        return [200, createBody(1)]
+    }
 }
