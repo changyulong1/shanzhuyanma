@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { mockSession } from "../mock/mock";
+import { mockSession, mockTagIndex } from "../mock/mock";
 type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
 type PatchConfig = Omit<AxiosRequestConfig, 'url' | 'data'>
@@ -34,16 +34,19 @@ const mock = (response: AxiosResponse) => {
         && location.hostname !== '127.0.0.1'
         && location.hostname !== '192.168.3.57') { return false }
     switch (response.config?.params?._mock) {
+        case 'tagIndex':
+            [response.status, response.data] = mockTagIndex(response.config)
+            return true
         case 'session':
             [response.status, response.data] = mockSession(response.config)
             return true
+
     }
     return false
 }
 export const http = new Http('/api/v1')
 
 http.instance.interceptors.request.use(config => {
-    console.log(666)
     const jwt = localStorage.getItem('jwt')
     if (jwt) {
         config.headers!.Authorization = `Bearer ${jwt}`
@@ -64,7 +67,6 @@ http.instance.interceptors.response.use((response) => {
 
 
 http.instance.interceptors.response.use(response => {
-    console.log('response')
     return response
 }, (error) => {
     if (error.response) {

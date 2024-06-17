@@ -11,10 +11,8 @@
 }
 
 .inputPad_warp {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .tags_wrapper {
