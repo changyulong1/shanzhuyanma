@@ -3,6 +3,7 @@ import { MainLayout } from '../../layouts/MainLayout'
 import { Rules, validate } from '../../shared/validate';
 import { Icon } from '../../shared/Icon'
 import { TagFrom } from '../../shared/TagForm';
+import { BackIcon } from '../../shared/BackIcon';
 export const TagCreate = defineComponent({
     setup(props, context) {
         const formData = reactive({
@@ -27,7 +28,7 @@ export const TagCreate = defineComponent({
             <MainLayout>
                 {{
                     title: () => '新建标签',
-                    icon: () => <Icon name="left" onClick={() => { }} />,
+                    icon: () => <BackIcon />,
                     default: () => (
                         <TagFrom />
                     )
