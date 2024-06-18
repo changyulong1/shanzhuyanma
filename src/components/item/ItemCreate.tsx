@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, PropType, ref } from 'vue'
+import { defineComponent, onMounted, PropType, reactive, ref } from 'vue'
 import { MainLayout } from '../../layouts/MainLayout'
 import { Button } from '../../shared/Button'
 import { http } from '../../shared/http'
@@ -15,10 +15,12 @@ export const ItemCreate = defineComponent({
         }
     },
     setup(props, context) {
-        const refKind = ref('支出')
-        const refTagId = ref<number>()
-        const refHappenAt = ref<string>(new Date().toISOString())
-        const refAmount = ref<number>(0)
+        const formData = reactive({
+            kind: '支出',
+            tags_id: [],
+            amount: 0,
+            happen_at: new Date().toISOString(),
+        })
         return () => (
             <MainLayout>
                 {{
@@ -27,21 +29,21 @@ export const ItemCreate = defineComponent({
                     default: () => <>
                         <div class={s.wrapper}>
                             <div>
-                                <span> ID: {refTagId.value}</span>
-                                <span> 时间：{refHappenAt.value}</span>
-                                <span>金钱：{refAmount.value}</span>
+                                <span> ID: {formData.tags_id}</span>
+                                <span> 时间：{formData.happen_at}</span>
+                                <span>金钱：{formData.amount}</span>
                             </div>
-                            <Tabs v-model:selected={refKind.value} class={s.tabs}>
+                            <Tabs v-model:selected={formData.kind} class={s.tabs}>
                                 <Tab name='支出' >
-                                    <Tags kindL='expenses' v-model:selected={refTagId.value} />
+                                    <Tags kindL='expenses' v-model:selected={formData.tags_id[0]} />
                                 </Tab>
                                 <Tab name='收入'>
-                                    <Tags kindL='income' v-model:selected={refTagId.value} />
+                                    <Tags kindL='income' v-model:selected={formData.tags_id[0]} />
                                 </Tab>
                             </Tabs>
                             <div class={s.inputPad_warp} >
-                                <InputPad v-model:happenAt={refHappenAt.value}
-                                    v-model:amount={refAmount.value}
+                                <InputPad v-model:happenAt={formData.happen_at}
+                                    v-model:amount={formData.amount}
                                 />
                             </div>
                         </div>
