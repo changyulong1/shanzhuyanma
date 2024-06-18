@@ -34,7 +34,8 @@ export const Tabs = defineComponent({
                 </ol>
                 <div>
                     {tabs.map(item =>
-                        <div v-show={item.props?.name === props.selected}>{item}</div>
+                        <div v-show={item.props?.name === props.selected}
+                        >{item}</div>
                     )}
                 </div>
             </div >

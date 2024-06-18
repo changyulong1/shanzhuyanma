@@ -1,7 +1,8 @@
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref } from 'vue'
 import { Button } from '../../shared/Button'
 import { http } from '../../shared/http'
 import { Icon } from '../../shared/Icon'
+import { Time } from '../../shared/time'
 import { useTags } from '../../shared/useTags'
 import s from './Tags.module.scss'
 export const Tags = defineComponent({
@@ -9,9 +10,12 @@ export const Tags = defineComponent({
         kindL: {
             type: String as PropType<string>,
             required: true
-        }
+        },
+        selected: Number
     },
+    emits: ['update:selected'],
     setup(props, context) {
+        const tag = ref<Tag>()
         const { tags, hasMore, page, fetchTags } = useTags((page) => {
             return http.get<Resources<Tag>>('/tags', {
                 kind: props.kindL,
@@ -19,6 +23,10 @@ export const Tags = defineComponent({
                 _mock: 'tagIndex'
             })
         })
+
+        const tagSelected = (time: Tag) => {
+            context.emit('update:selected', time.id)
+        }
         return () => <>
             <div class={s.tags_wrapper}>
                 <div class={s.tag}>
@@ -30,7 +38,9 @@ export const Tags = defineComponent({
                     </div>
                 </div>
                 {tags.value.map(time => {
-                    return <div class={[s.tag, s.selected]}>
+                    return <div class={[s.tag, props.selected === time.id ? s.selected : '']}
+                        onClick={() => { tagSelected(time) }}
+                    >
                         <div class={s.sign}>
                             {time.sign}
                         </div>
