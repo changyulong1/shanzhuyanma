@@ -28,8 +28,30 @@ export const Tags = defineComponent({
         const tagSelected = (time: Tag) => {
             context.emit('update:selected', time.id)
         }
+        const timer = ref<number>()
+        const currentTag = ref<HTMLDivElement>()
+        const onLongPress = () => {
+            console.log('长按')
+        }
+        const onTouchstart = (e: TouchEvent) => {
+            currentTag.value = e.currentTarget as HTMLDivElement
+            timer.value = setTimeout(() => {
+                onLongPress()
+            }, 500);
+        }
+        const onTouchend = (e: TouchEvent) => {
+            clearTimeout(timer.value)
+        }
+        const onTouchmove = (e: TouchEvent) => {
+            const pointedElement = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY)
+            if (currentTag.value != pointedElement &&
+                currentTag.value?.contains(pointedElement) === false
+            ) {
+                clearTimeout(timer.value)
+            }
+        }
         return () => <>
-            <div class={s.tags_wrapper}>
+            <div class={s.tags_wrapper} onTouchmove={onTouchmove}>
                 <RouterLink to={`/tags/create?kind=${props.kindL}`} class={s.tag}>
                     <div class={s.sign}>
                         <Icon name='add' class={s.createTag} />
@@ -42,6 +64,8 @@ export const Tags = defineComponent({
                 {tags.value.map(time => {
                     return <div class={[s.tag, props.selected === time.id ? s.selected : '']}
                         onClick={() => { tagSelected(time) }}
+                        onTouchstart={onTouchstart}
+                        onTouchend={onTouchend}
                     >
                         <div class={s.sign}>
                             {time.sign}

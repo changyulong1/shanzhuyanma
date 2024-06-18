@@ -31,13 +31,12 @@ export const TagFrom = defineComponent({
             if (!hasError(errors)) {
                 const response = await http.post('/tags', formData, {
                     params: { _mock: 'tagCreate' },
-                }).catch((error) =>
+                }).catch((error) => {
                     onFormError(error, (data) => Object.assign(errors, data.errors))
+                }
                 )
-                router.back()
+                // router.back()
             }
-
-
         }
         return () => (
             <Form onSubmit={onSubmit}>
