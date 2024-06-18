@@ -1,4 +1,5 @@
 import { defineComponent, PropType, ref } from 'vue'
+import { RouterLink } from 'vue-router'
 import { Button } from '../../shared/Button'
 import { http } from '../../shared/http'
 import { Icon } from '../../shared/Icon'
@@ -29,14 +30,15 @@ export const Tags = defineComponent({
         }
         return () => <>
             <div class={s.tags_wrapper}>
-                <div class={s.tag}>
+                <RouterLink to={`/tags/create?kind=${props.kindL}`} class={s.tag}>
                     <div class={s.sign}>
                         <Icon name='add' class={s.createTag} />
                     </div>
                     <div class={s.name}>
                         新增
                     </div>
-                </div>
+                </RouterLink>
+
                 {tags.value.map(time => {
                     return <div class={[s.tag, props.selected === time.id ? s.selected : '']}
                         onClick={() => { tagSelected(time) }}
