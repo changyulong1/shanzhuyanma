@@ -32,7 +32,7 @@ export const Tags = defineComponent({
         const currentTag = ref<HTMLDivElement>()
         const router = useRouter()
         const onLongPress = (tagId: Tag['id']) => {
-            router.push(`/tags/${tagId}/edit/?kid=${props.kindL}&return_to=${router.currentRoute.value.fullPath}`)
+            router.push(`/tags/${tagId}/edit/?kind=${props.kindL}&return_to=${router.currentRoute.value.fullPath}`)
         }
         const onTouchstart = (e: TouchEvent, tag: Tag) => {
             currentTag.value = e.currentTarget as HTMLDivElement

@@ -1,4 +1,5 @@
 import { defineComponent, reactive } from 'vue'
+import { useRoute } from 'vue-router'
 import { MainLayout } from '../../layouts/MainLayout'
 import { BackIcon } from '../../shared/BackIcon'
 import { Button } from '../../shared/Button'
@@ -10,23 +11,10 @@ import s from './Tag.module.scss'
 export const TagEdit = defineComponent({
 
     setup(props, context) {
-        const formData = reactive({
-            name: '',
-            sign: '',
-        })
-        const errors = reactive<{ [k in keyof typeof formData]?: string[] }>({})
-        const onSubmit = (e: Event) => {
-            const rules: Rules<typeof formData> = [
-                { key: 'name', type: 'required', message: '必填' },
-                { key: 'name', type: 'pattern', regex: /^.{1,4}$/, message: '只能填 1 到 4 个字符' },
-                { key: 'sign', type: 'required', message: '必填' },
-            ]
-            Object.assign(errors, {
-                name: undefined,
-                sign: undefined
-            })
-            Object.assign(errors, validate(formData, rules))
-            e.preventDefault()
+        const route = useRoute()
+        const numberId = parseInt(route.params.id!.toString())
+        if (Number.isNaN(numberId)) {
+            return <div>用户不存在</div>
         }
         return () => <>
             <MainLayout>
@@ -34,7 +22,7 @@ export const TagEdit = defineComponent({
                     title: () => '新建标签',
                     icon: () => <BackIcon />,
                     default: () => <>
-                        <TagFrom />
+                        <TagFrom id={numberId} />
                         <div class={s.actions}>
                             <Button level='danger' class={[s.removeTags]}>删除标签</Button>
                             <Button level='danger' class={[s.removeTagsAndItems]}>删除标签和记账</Button>
