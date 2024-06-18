@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { mockSession, mockTagIndex } from "../mock/mock";
+import { mockItemCreate, mockSession, mockTagIndex } from "../mock/mock";
 type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
 type PatchConfig = Omit<AxiosRequestConfig, 'url' | 'data'>
@@ -39,6 +39,9 @@ const mock = (response: AxiosResponse) => {
             return true
         case 'session':
             [response.status, response.data] = mockSession(response.config)
+            return true
+        case 'itemCreate':
+            [response.status, response.data] = mockItemCreate(response.config)
             return true
 
     }

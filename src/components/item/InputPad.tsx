@@ -9,7 +9,10 @@ import { number } from 'echarts';
 export const InputPad = defineComponent({
     props: {
         happenAt: String,
-        amount: Number
+        amount: Number,
+        onSubmit: {
+            type: Function as PropType<() => void>
+        }
     },
     setup(props, context) {
         const now = new Date()
@@ -59,6 +62,7 @@ export const InputPad = defineComponent({
                 onclick: () => {
                     console.log(refAmount.value)
                     context.emit('update:amount', parseFloat(refAmount.value) * 100)
+                    props.onSubmit?.()
                 }
             },
 

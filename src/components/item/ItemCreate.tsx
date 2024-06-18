@@ -1,3 +1,5 @@
+import { AxiosError } from 'axios'
+import { Dialog } from 'vant'
 import { defineComponent, onMounted, PropType, reactive, ref } from 'vue'
 import { MainLayout } from '../../layouts/MainLayout'
 import { Button } from '../../shared/Button'
@@ -21,6 +23,22 @@ export const ItemCreate = defineComponent({
             amount: 0,
             happen_at: new Date().toISOString(),
         })
+        const onError = (error: AxiosError<ResourceError>) => {
+            if (error.response?.status == 422) {
+                Dialog.alert({
+                    title: '出错',
+                    message: Object.values(error.response.data.errors).join('\n')
+                })
+            }
+            throw error
+
+        }
+        const onSubmit = async () => {
+            const response = await http.post<Resource<Item>>('/items', formData, {
+                params: { _mock: 'itemCreate' }
+            }).catch(onError)
+            console.log(response.data.resource)
+        }
         return () => (
             <MainLayout>
                 {{
@@ -44,6 +62,7 @@ export const ItemCreate = defineComponent({
                             <div class={s.inputPad_warp} >
                                 <InputPad v-model:happenAt={formData.happen_at}
                                     v-model:amount={formData.amount}
+                                    onSubmit={onSubmit}
                                 />
                             </div>
                         </div>
