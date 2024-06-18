@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios'
 import { Dialog } from 'vant'
 import { defineComponent, onMounted, PropType, reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { MainLayout } from '../../layouts/MainLayout'
 import { Button } from '../../shared/Button'
 import { http } from '../../shared/http'
@@ -23,6 +24,7 @@ export const ItemCreate = defineComponent({
             amount: 0,
             happen_at: new Date().toISOString(),
         })
+        const router = useRouter()
         const onError = (error: AxiosError<ResourceError>) => {
             if (error.response?.status == 422) {
                 Dialog.alert({
@@ -38,6 +40,7 @@ export const ItemCreate = defineComponent({
                 params: { _mock: 'itemCreate' }
             }).catch(onError)
             console.log(response.data.resource)
+            router.push('/items')
         }
         return () => (
             <MainLayout>
