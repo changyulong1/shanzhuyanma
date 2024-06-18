@@ -10,7 +10,7 @@
         background: var(--navbar-bg-end);
         position: sticky;
         top: 0;
-        z-index: var(--z-index-navbar);
+        z-index: 1;
 
         >li {
             flex-grow: 1;
