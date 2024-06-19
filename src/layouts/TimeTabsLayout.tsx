@@ -30,13 +30,21 @@ export const TimeTabsLayout = defineComponent({
         const refSelected = ref('本月')
         const time = new Time()
         const refOverlayVisible = ref(false)
+        const tempTime = reactive({
+            start: new Time().format(),
+            end: new Time().format()
+        })
         const customTime = reactive<{
             start?: string,
             end?: string
         }>({})
+        const onSubmitCustomTime = (e: Event) => {
+            e.preventDefault()
+            refOverlayVisible.value = false
+            Object.assign(customTime, tempTime)
+        }
         const onSelect = (value: string) => {
             if (value === '自定义时间') {
-                console.log(555)
                 refOverlayVisible.value = true
             }
         }
@@ -91,15 +99,15 @@ export const TimeTabsLayout = defineComponent({
                                     请选择时间
                                 </header>
                                 <main>
-                                    <Form>
+                                    <Form onSubmit={onSubmitCustomTime}>
                                         <FormItem label='开始时间' v-model={customTime.start} type='date' />
                                         <FormItem label='开始时间' v-model={customTime.end} type='date' />
-                                    </Form>
-                                    <Form>
-                                        <div class={s.actions}>
-                                            <button type='button'>取消</button>
-                                            <button type='button' onClick={() => { refOverlayVisible.value = false }}>确定</button>
-                                        </div>
+                                        <FormItem>
+                                            <div class={s.actions}>
+                                                <button type='button' onClick={() => { refOverlayVisible.value = false }}>取消</button>
+                                                <button type='submit' >确认</button>
+                                            </div>
+                                        </FormItem>
                                     </Form>
                                 </main>
                             </div>
