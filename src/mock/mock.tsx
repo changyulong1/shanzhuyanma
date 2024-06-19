@@ -4,6 +4,40 @@ import { AxiosRequestConfig } from 'axios';
 type Mock = (config: AxiosRequestConfig) => [number, any]
 
 faker.setLocale('zh_CN');
+let id = 0
+const createId = () => {
+    id += 1
+    return id
+}
+
+export const mockItemIndex: Mock = (config) => {
+    const { kind, page } = config.params
+    const per_page = 25
+    const count = 26
+    const createPaper = (page = 1) => ({
+        page, per_page, count
+    })
+    const createTag = (n = 1, attrs?: any) =>
+        Array.from({ length: n }).map(() => ({
+            id: createId(),
+            user_id: createId(),
+            amount: Math.floor(Math.random() * 10000),
+            tags_id: [createId()],
+            happen_at: faker.date.past().toISOString(),
+            kind: config.params.kind,
+        }))
+    const createBody = (n = 1, attrs?: any) => ({
+        resources: createTag(n), pager: createPaper(page)
+    })
+    if (!page || page === 1) {
+        return [200, createBody(25)]
+    } else if (page === 2) {
+        return [200, createBody(1)]
+    } else {
+        return [200, {}]
+    }
+
+}
 export const mockTagEdit: Mock = config => {
     console.log(2)
     const createTag = (attrs?: any) =>
@@ -52,11 +86,7 @@ export const mockSession: Mock = (config) => {
         jwt: faker.random.word()
     }]
 }
-let id = 0
-const createId = () => {
-    id += 1
-    return id
-}
+
 export const mockTagIndex: Mock = (config) => {
     const { kind, page } = config.params
     const per_page = 25

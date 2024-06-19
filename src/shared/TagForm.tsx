@@ -46,7 +46,7 @@ export const TagFrom = defineComponent({
                 )
                 //这样的写法可以得到请求的结果
                 console.log((await promise).data)
-                // router.back()
+                router.back()
             }
         }
         onMounted(async () => {
