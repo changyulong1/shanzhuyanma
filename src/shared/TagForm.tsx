@@ -9,10 +9,7 @@ import s from './TagFrom.module.scss'
 import { hasError, Rules, validate } from './validate'
 export const TagFrom = defineComponent({
     props: {
-        id: {
-            type: Number as PropType<number>,
-            required: true
-        }
+        id: Number
     },
     setup(props, context) {
         const route = useRoute()
@@ -37,7 +34,6 @@ export const TagFrom = defineComponent({
             })
             Object.assign(errors, validate(formData, rules))
             if (!hasError(errors)) {
-                console.log(formData.id)
                 const promise = await formData.id ?
                     http.patch(`/tags/${formData.id}`, formData, {
                         params: { _mock: 'tagEdit' },
@@ -48,6 +44,8 @@ export const TagFrom = defineComponent({
                 await promise.catch((error) =>
                     onFormError(error, (data) => Object.assign(errors, data.errors))
                 )
+                //这样的写法可以得到请求的结果
+                console.log((await promise).data)
                 // router.back()
             }
         }
