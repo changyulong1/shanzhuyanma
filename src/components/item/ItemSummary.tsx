@@ -1,5 +1,5 @@
 import { time } from 'echarts'
-import { defineComponent, onMounted, PropType, ref } from 'vue'
+import { defineComponent, onMounted, PropType, reactive, ref } from 'vue'
 import { Button } from '../../shared/Button'
 import { Datetime } from '../../shared/Datetime'
 import { FloatButton } from '../../shared/FloatButton'
@@ -36,15 +36,42 @@ export const ItemSummary = defineComponent({
             page.value += 1
         }
         onMounted(fetchItems)
+        const itemsBalance = reactive({
+            expenses: 0, income: 0, balance: 0
+        })
+        onMounted(async () => {
+            const response = await http.get('/items/balance', {
+                happen_after: props.startDate,
+                happen_before: props.endDate,
+                page: page.value,
+                _mock: 'itemIndexBalance'
+            })
+            Object.assign(itemsBalance, response.data)
+        })
         return () => (
             <div class={s.wrapper}>
                 {
                     items.value ? (
                         <>
                             <ul class={s.tota}>
-                                <li><span>收入</span><span>128</span></li>
-                                <li><span>支出</span><span>99</span></li>
-                                <li><span>净收入</span><span>39</span></li>
+                                <li>
+                                    <span>收入</span>
+                                    <span>
+                                        <Money value={itemsBalance.income} />
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>支出</span>
+                                    <span>
+                                        <Money value={itemsBalance.expenses} />
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>净收入</span>
+                                    <span>
+                                        <Money value={itemsBalance.balance} />
+                                    </span>
+                                </li>
                             </ul>
                             <ol class={s.list}>
                                 {items.value.map(item => (
