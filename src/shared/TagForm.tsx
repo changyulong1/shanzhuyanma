@@ -37,21 +37,25 @@ export const TagFrom = defineComponent({
             })
             Object.assign(errors, validate(formData, rules))
             if (!hasError(errors)) {
-                console.log(22)
-                const response = await formData.id ?
+                console.log(formData.id)
+                const promise = await formData.id ?
                     http.patch(`/tags/${formData.id}`, formData, {
                         params: { _mock: 'tagEdit' },
-                    }) : http.post('/tags', {
+                    }) :
+                    http.post('/tags', formData, {
                         params: { _mock: 'tagCreate' },
                     })
+                await promise.catch((error) =>
+                    onFormError(error, (data) => Object.assign(errors, data.errors))
+                )
                 // router.back()
-                console.log(response)
             }
         }
         onMounted(async () => {
             const response = await http.get<Resource<Tag>>(`/tags/${props.id}`, {
                 _mock: 'tagShow'
             })
+            console.log(response.data.resource)
             Object.assign(formData, response.data.resource)
         })
         return () => (
