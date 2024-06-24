@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { mockItemCreate, mockItemIndex, mockItemIndexBalance, mockSession, mockTagEdit, mockTagIndex, mockTagShow } from "../mock/mock";
+import { getCode, getMe, mockItemCreate, mockItemIndex, mockItemIndexBalance, mockSession, mockTagEdit, mockTagIndex, mockTagShow } from "../mock/mock";
 type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
 type PatchConfig = Omit<AxiosRequestConfig, 'url' | 'data'>
@@ -17,6 +17,7 @@ export class Http {
     }
     // create
     post<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: PostConfig) {
+        console.log(222)
         return this.instance.request<R>({ ...config, url, data, method: 'post' })
     }
     // update
@@ -30,6 +31,7 @@ export class Http {
 }
 
 const mock = (response: AxiosResponse) => {
+    console.log('mock数据')
     if (location.hostname !== 'localhost'
         && location.hostname !== '127.0.0.1'
         && location.hostname !== '192.168.3.57') { return false }
@@ -39,6 +41,7 @@ const mock = (response: AxiosResponse) => {
             return true
         case 'session':
             [response.status, response.data] = mockSession(response.config)
+            console.log(2, response.data)
             return true
         case 'itemCreate':
             [response.status, response.data] = mockItemCreate(response.config)
@@ -55,11 +58,17 @@ const mock = (response: AxiosResponse) => {
         case 'itemIndexBalance':
             [response.status, response.data] = mockItemIndexBalance(response.config)
             return true
+        case 'mes':
+            [response.status, response.data] = getMe(response.config)
+            return true
+        case 'validation':
+            [response.status, response.data] = getCode(response.config)
+            return true
 
     }
     return false
 }
-export const http = new Http('/api/v1')
+export const http = new Http('http://127.0.0.1:3000/')
 
 http.instance.interceptors.request.use(config => {
     const jwt = localStorage.getItem('jwt')
@@ -70,6 +79,7 @@ http.instance.interceptors.request.use(config => {
 })
 //使用拦截器来实践mock数据
 http.instance.interceptors.response.use((response) => {
+    console.log(response)
     mock(response)
     return response
 }, (error) => {

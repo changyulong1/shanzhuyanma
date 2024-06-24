@@ -26,6 +26,18 @@ type Item = {
     kind: expenses | income
 }
 
+type Group = {
+    tag_id: number,
+    tag: Item,
+    amount: number
+}
+type Groups<T> = {
+    Groups: T[]
+}
+type User = {
+    id: number;
+    name: string;
+}
 type Resources<T = any> = {
     resources: T[],
     pager: {

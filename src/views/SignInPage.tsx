@@ -35,14 +35,15 @@ export const SignInPage = defineComponent({
                 { key: 'code', type: 'required', message: '必填' },
             ]))
             if (!hasError(errors)) {
-                const response = await http.post<{ jwt: string }>('/session', formData).catch(onError)
-                console.log(response)
+                console.log(1)
+                const response = await http.post<{ jwt: string }>('/session', formData, {
+                    params: { _mock: 'session' }
+                }).catch(onError)
                 localStorage.setItem('jwt', response.data.jwt)
                 const returnTo = route.query.return_to?.toString()
                 refreshMe().then(() => {
                     router.push(returnTo || '/')
                 })
-
             }
 
         }
@@ -58,9 +59,12 @@ export const SignInPage = defineComponent({
             disabled()
             console.log(formData.email)
             const response = await http
-                .post('/validation_codes', { email: formData.email })
+                .post('/validation_codes', { email: formData.email }, {
+                    params: { _mock: 'validation' }
+                })
                 .catch(onError)
                 .finally(enable)
+            console.log('123', response)
             //成功
             refValidationCode.value.startCount()
         }

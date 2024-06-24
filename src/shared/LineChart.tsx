@@ -4,11 +4,12 @@ import * as echarts from 'echarts';
 export const LineChart = defineComponent({
     setup(props, context) {
         const myDo = ref<HTMLDivElement>()
+        let chart: echarts.ECharts | undefined = undefined
         onMounted(() => {
             if (myDo.value === undefined) { return }
-            var myChart = echarts.init(myDo.value);
+            chart = echarts.init(myDo.value);
             // 绘制图表
-            myChart.setOption({
+            chart.setOption({
                 grid: [
                     { left: 0, top: 0, right: 0, bottom: 20 }
                 ],
@@ -30,6 +31,7 @@ export const LineChart = defineComponent({
         })
 
         return () => (
+            // <div ref={myDo} class={s.wrapper}></div>
             <div ref={myDo} class={s.wrapper}></div>
         )
     }

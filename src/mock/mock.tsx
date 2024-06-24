@@ -9,6 +9,19 @@ const createId = () => {
     id += 1
     return id
 }
+export const getCode: Mock = (config) => {
+    return [200, { resource: 'ok' }]
+}
+export const getMe: Mock = (config) => {
+    const createTag = (attrs?: any) =>
+    ({
+        id: createId(),
+        name: faker.lorem.word(),
+        sign: faker.internet.emoji(),
+        ...attrs
+    })
+    return [200, { resource: createTag() }]
+}
 export const mockItemIndexBalance: Mock = (config) => {
     return [200, {
         expenses: 9900,
