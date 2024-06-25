@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { getCode, getMe, mockItemCreate, mockItemIndex, mockItemIndexBalance, mockSession, mockTagEdit, mockTagIndex, mockTagShow } from "../mock/mock";
+import { mockItemCreate, mockItemIndex, mockItemIndexBalance, mockSession, mockTagEdit, mockTagIndex, mockTagShow } from "../mock/mock";
 type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
 type PatchConfig = Omit<AxiosRequestConfig, 'url' | 'data'>
@@ -31,7 +31,6 @@ export class Http {
 }
 
 const mock = (response: AxiosResponse) => {
-    console.log('mock数据')
     if (location.hostname !== 'localhost'
         && location.hostname !== '127.0.0.1'
         && location.hostname !== '192.168.3.57') { return false }
@@ -58,17 +57,11 @@ const mock = (response: AxiosResponse) => {
         case 'itemIndexBalance':
             [response.status, response.data] = mockItemIndexBalance(response.config)
             return true
-        case 'mes':
-            [response.status, response.data] = getMe(response.config)
-            return true
-        case 'validation':
-            [response.status, response.data] = getCode(response.config)
-            return true
 
     }
     return false
 }
-export const http = new Http('http://127.0.0.1:3000/')
+export const http = new Http('/api/v1/')
 
 http.instance.interceptors.request.use(config => {
     const jwt = localStorage.getItem('jwt')
@@ -79,7 +72,6 @@ http.instance.interceptors.request.use(config => {
 })
 //使用拦截器来实践mock数据
 http.instance.interceptors.response.use((response) => {
-    console.log(response)
     mock(response)
     return response
 }, (error) => {

@@ -9,6 +9,12 @@
     color: var(--text);
 }
 
+.email {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .mask {
     position: fixed;
     width: 100%;

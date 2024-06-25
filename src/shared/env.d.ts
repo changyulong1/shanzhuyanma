@@ -36,7 +36,7 @@ type Groups<T> = {
 }
 type User = {
     id: number;
-    name: string;
+    email: string;
 }
 type Resources<T = any> = {
     resources: T[],
