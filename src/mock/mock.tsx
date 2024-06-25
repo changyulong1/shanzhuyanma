@@ -10,14 +10,14 @@ const createId = () => {
     return id
 }
 export const mockItemSummary: Mock = config => {
-    if (config.params.group_by === 'happend_at') {
+    if (config.params.group_by === 'happen_at') {
         return [
             200,
             {
                 groups: [
-                    { happen_at: '2022-07-18T00:00:00.000+0800', amount: 100 },
-                    { happen_at: '2022-07-22T00:00:00.000+0800', amount: 300 },
-                    { happen_at: '2022-07-29T00:00:00.000+0800', amount: 200 }
+                    { happen_at: '2024-06-18T00:00:00.000+0800', amount: 100 },
+                    { happen_at: '2024-06-22T00:00:00.000+0800', amount: 300 },
+                    { happen_at: '2024-06-25T00:00:00.000+0800', amount: 200 }
                 ],
                 summary: 600
             }
@@ -27,9 +27,9 @@ export const mockItemSummary: Mock = config => {
             200,
             {
                 groups: [
-                    { tag_id: 1, tag: { id: 1, name: '交通' }, amount: 100 },
-                    { tag_id: 2, tag: { id: 2, name: '吃饭' }, amount: 300 },
-                    { tag_id: 3, tag: { id: 3, name: '购物' }, amount: 200 }
+                    { tag_id: 1, tag: { id: 1, name: '交通', sign: faker.internet.emoji() }, amount: 100 },
+                    { tag_id: 2, tag: { id: 2, name: '吃饭', sign: faker.internet.emoji() }, amount: 300 },
+                    { tag_id: 3, tag: { id: 3, name: '购物', sign: faker.internet.emoji() }, amount: 200 }
                 ],
                 summary: 600
             }
