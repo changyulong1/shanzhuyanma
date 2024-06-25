@@ -1,8 +1,11 @@
 .wrapper {
     margin-bottom: 128px;
+    display: flex;
+    flex-direction: column;
 }
 
 .topItem {
+    flex-grow: 1;
     margin-top: 16px;
     display: flex;
     align-items: center;
@@ -11,13 +14,14 @@
     .sign {
         flex-grow: 0;
         flex-shrink: 0;
-        width: 48px;
-        height: 48px;
+        width: 36px;
+        height: 36px;
         display: flex;
         justify-content: center;
         align-items: center;
         background: var(--tag-bg);
         border-radius: 50%;
+        font-size: 12px;
     }
 
     .bar_wrapper {
