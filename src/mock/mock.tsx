@@ -12,9 +12,9 @@ const createId = () => {
 export const mockItemSummary: Mock = config => {
     return [200, {
         "groups": [
-            { "happen_at": "2024-07-18T00:00:00.000+0800", "amount": 100 },
-            { "happen_at": "2024-06-22T00:00:00.000+0800", "amount": 300 },
-            { "happen_at": "2024-06-29T00:00:00.000+0800", "amount": 200 }
+            { "happen_at": "2024-05-18T00:00:00.000+0800", "amount": 100 },
+            { "happen_at": "2024-05-22T00:00:00.000+0800", "amount": 300 },
+            { "happen_at": "2024-05-29T00:00:00.000+0800", "amount": 200 }
         ],
         "summary": 600
     }]
