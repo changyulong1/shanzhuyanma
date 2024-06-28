@@ -23,7 +23,6 @@ export const StartPages = defineComponent({
                             <RouterLink to='/items/create'>
                                 <Button class={s.button}>开始记账</Button>
                             </RouterLink>
-
                         </div>
                         <RouterLink to='/items/create'>
                             <FloatButton iconName='add'></FloatButton>

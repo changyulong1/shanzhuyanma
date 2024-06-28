@@ -9,7 +9,7 @@ export const ThirdAction = () => {
         <div class={s.actions}>
             <SkipFeatures class={s.fake} />
             <span onClick={onclick}>
-                <RouterLink to='/Start'>完成</RouterLink>
+                <RouterLink to='/items'>完成</RouterLink>
             </span>
             <SkipFeatures class={s.fake} />
         </div>
