@@ -3,7 +3,6 @@ import { First } from '../components/welcome/First'
 import { Forth } from '../components/welcome/Forth'
 import { Second } from '../components/welcome/Second'
 import { Third } from '../components/welcome/Third'
-import { StartPages } from '../views/StartPage'
 import { ForthAction } from '../components/welcome/ForthAction'
 import { FirstAction } from '../components/welcome/FirstAction'
 import { SecondAction } from '../components/welcome/SecondAction'
@@ -36,6 +35,7 @@ export const routes: RouteRecordRaw[] = [
             { path: '4', name: "Welcome4", components: { main: Third, footer: ThirdAction } }
         ]
     },
+    //删除StartPages.tsx StartPages.module.scss
     // { path: '/Start', component: StartPages },
     {
         path: '/items', component: ItemPage,
