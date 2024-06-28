@@ -30,7 +30,7 @@ export const TagEdit = defineComponent({
             })
             await http.delete(`/tags/${numberId}`, {
                 withItems: options?.withItems ? 'true' : 'false'
-            }).catch(onError)
+            }, { _autoLoading: true }).catch(onError)
             //返回原来的页面
             router.back()
         }

@@ -71,9 +71,7 @@ http.instance.interceptors.request.use(config => {
     if (jwt) {
         config.headers!.Authorization = `Bearer ${jwt}`
     }
-    console.log(config._autoLoading)
     if (config._autoLoading === true) {
-        console.log(1)
         Toast.loading({
             message: '加载中...',
             forbidClick: true,
@@ -84,13 +82,11 @@ http.instance.interceptors.request.use(config => {
 })
 http.instance.interceptors.response.use((response) => {
     if (response.config._autoLoading === true) {
-        console.log(2)
         Toast.clear();
     }
     return response
 }, (error: AxiosError) => {
     if (error.response?.config._autoLoading === true) {
-        console.log(3)
         Toast.clear();
     }
     throw error

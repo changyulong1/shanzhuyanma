@@ -50,7 +50,8 @@ export const Charts = defineComponent({
                 group_by: 'happen_at',
 
             }, {
-                _mock: 'itemSummary'
+                _mock: 'itemSummary',
+                _autoLoading: true
             })
             data1.value = response.data.groups
         }
