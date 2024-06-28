@@ -40,7 +40,6 @@ export const ItemCreate = defineComponent({
             const response = await http.post<Resource<Item>>('/items', formData, {
                 params: { _mock: 'itemCreate' }
             }).catch(onError)
-            console.log(response.data.resource)
             router.push('/items')
         }
         return () => (
@@ -50,11 +49,6 @@ export const ItemCreate = defineComponent({
                     icon: () => <BackIcon />,
                     default: () => <>
                         <div class={s.wrapper}>
-                            <div>
-                                <span> ID: {formData.tags_id}</span>
-                                <span> 时间：{formData.happen_at}</span>
-                                <span>金钱：{formData.amount}</span>
-                            </div>
                             <Tabs v-model:selected={formData.kind} class={s.tabs}>
                                 <Tab name='支出' >
                                     <Tags kindL='expenses' v-model:selected={formData.tags_id[0]} />

@@ -17,7 +17,6 @@ export class Http {
     }
     // create
     post<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: PostConfig) {
-        console.log(222)
         return this.instance.request<R>({ ...config, url, data, method: 'post' })
     }
     // update

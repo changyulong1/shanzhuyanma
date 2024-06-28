@@ -35,7 +35,6 @@ export const SignInPage = defineComponent({
                 { key: 'code', type: 'required', message: '必填' },
             ]))
             if (!hasError(errors)) {
-                console.log(1)
                 const response = await http.post<{ jwt: string }>('/session', formData)
                     .catch(onError)
                 localStorage.setItem('jwt', response.data.jwt)
@@ -56,14 +55,12 @@ export const SignInPage = defineComponent({
         const refValidationCode = ref<any>()
         const onClickSendValidationCode = async () => {
             disabled()
-            console.log(formData.email)
             const response = await http
                 .post('/validation_codes', { email: formData.email }, {
                     params: { _mock: 'validation' }
                 })
                 .catch(onError)
                 .finally(enable)
-            console.log('123', response)
             //成功
             refValidationCode.value.startCount()
         }
@@ -78,7 +75,6 @@ export const SignInPage = defineComponent({
                                 <Icon class={s.icon} name="mangosteen" />
                                 <h1 class={s.appName}>山竹记账</h1>
                             </div>
-                            <span>测试{formData.code}</span>
                             <Form onSubmit={onSubmit}>
                                 <FormItem label="邮箱地址" type="text"
                                     placeholder='请输入邮箱，然后点击发送验证码'

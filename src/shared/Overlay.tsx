@@ -20,10 +20,8 @@ export const Overlay = defineComponent({
         onMounted(async () => {
             const resource = await mePromise
             me.value = resource?.data.resource
-            console.log(666, me.value)
         })
         const onSignOut = async () => {
-
             await Dialog.confirm({
                 title: '确认',
                 message: '你真的要退出登录吗？',
