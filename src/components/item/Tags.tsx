@@ -21,6 +21,8 @@ export const Tags = defineComponent({
             return http.get<Resources<Tag>>('/tags', {
                 kind: props.kindL,
                 page: page + 1,
+
+            }, {
                 _mock: 'tagIndex'
             })
         })

@@ -1,4 +1,5 @@
-import { defineComponent, ref } from 'vue'
+import { Toast } from 'vant'
+import { defineComponent, onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { MainLayout } from '../layouts/MainLayout'
 import { Button } from '../shared/Button'
@@ -8,11 +9,7 @@ import { Icon } from '../shared/Icon'
 import { Overlay, OverlayIcon } from '../shared/Overlay'
 import s from './StartPages.module.scss'
 export const StartPages = defineComponent({
-    setup() {
-        const refOverlayVisible = ref(false)
-        const onClickMenu = () => {
-            refOverlayVisible.value = !refOverlayVisible.value
-        }
+    setup(props, context) {
         return () => (
             <MainLayout>
                 {{
