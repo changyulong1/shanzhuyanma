@@ -18,6 +18,7 @@ import { SignInPage } from '../views/SignInPage'
 import { StatisticsPage } from '../views/StatisticsPage'
 import { RouteRecordRaw } from 'vue-router'
 import { http } from '../shared/http'
+import { ComingSoon } from '../shared/ComingSoon'
 
 export const routes: RouteRecordRaw[] = [
     { path: '/', redirect: '/welcome' },
@@ -55,6 +56,10 @@ export const routes: RouteRecordRaw[] = [
     },
     {
         path: '/statistics', component: StatisticsPage
+    }, {
+        path: '/export', component: ComingSoon
+    }, {
+        path: '/notify', component: ComingSoon
     }
 
 ]
