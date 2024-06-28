@@ -16,7 +16,6 @@ import { TagEdit } from '../components/tag/TagEdit'
 import { SignInPage } from '../views/SignInPage'
 import { StatisticsPage } from '../views/StatisticsPage'
 import { RouteRecordRaw } from 'vue-router'
-import { http } from '../shared/http'
 import { ComingSoon } from '../shared/ComingSoon'
 
 export const routes: RouteRecordRaw[] = [
