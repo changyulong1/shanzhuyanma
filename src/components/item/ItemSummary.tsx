@@ -7,6 +7,7 @@ import { Datetime } from '../../shared/Datetime'
 import { FloatButton } from '../../shared/FloatButton'
 import { http } from '../../shared/http'
 import { Icon } from '../../shared/Icon'
+import { mePromise } from '../../shared/me'
 import { Money } from '../../shared/Money'
 import s from './ItemSummary.module.scss'
 export const ItemSummary = defineComponent({
@@ -25,6 +26,7 @@ export const ItemSummary = defineComponent({
         const hasMore = ref(false)
         const page = ref(0)
         const fetchItems = async () => {
+            if (!(localStorage.getItem('jwt'))) { return }
             if (!props.startDate || !props.endDate) { return }
             const response = await http.get<Resources<Item>>('/items', {
                 happen_after: props.startDate,
@@ -47,6 +49,7 @@ export const ItemSummary = defineComponent({
             expenses: 0, income: 0, balance: 0
         })
         const fetchItemsBalance = async () => {
+            if (!(localStorage.getItem('jwt'))) { return }
             if (!props.startDate || !props.endDate) { return }
             const response = await http.get('/items/balance', {
                 happen_after: props.startDate,
