@@ -26,7 +26,6 @@ export const ItemSummary = defineComponent({
         const hasMore = ref(false)
         const page = ref(0)
         const fetchItems = async () => {
-            if (!(localStorage.getItem('jwt'))) { return }
             if (!props.startDate || !props.endDate) { return }
             const response = await http.get<Resources<Item>>('/items', {
                 happen_after: props.startDate,
@@ -37,9 +36,12 @@ export const ItemSummary = defineComponent({
             items.value?.push(...resources)
             hasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
             page.value += 1
+            console.log(items.value)
+            console.log(items.value && items.value.length > 0)
         }
         onMounted(fetchItems)
         watch(() => [props.startDate, props.endDate], () => {
+            console.log('变动过')
             items.value = []
             hasMore.value = false
             page.value = 0
@@ -49,7 +51,6 @@ export const ItemSummary = defineComponent({
             expenses: 0, income: 0, balance: 0
         })
         const fetchItemsBalance = async () => {
-            if (!(localStorage.getItem('jwt'))) { return }
             if (!props.startDate || !props.endDate) { return }
             const response = await http.get('/items/balance', {
                 happen_after: props.startDate,
@@ -68,9 +69,11 @@ export const ItemSummary = defineComponent({
         })
         return () => (
             <div class={s.wrapper}>
+                <span>{items.value && items.value.length > 0 ? '显示数据' : '不显示数据'}</span>
                 {
-                    items.value && items.value.length > 0 ? (
+                    (items.value && items.value.length > 0) ? (
                         <>
+                            <div>应该显示这里</div>
                             <ul class={s.tota}>
                                 <li>
                                     <span>收入</span>
@@ -95,11 +98,11 @@ export const ItemSummary = defineComponent({
                                 {items.value.map(item => (
                                     <li>
                                         <div class={s.sign}>
-                                            <span>{item.tags![0].sign}</span>
+                                            <span>{item.tags && item.tags.length > 0 ? item.tags[0].sign : '💰'}</span>
                                         </div>
                                         <div class={s.text}>
                                             <div class={s.tagAndAmount}>
-                                                <span class={s.tag}>{item.tags![0].name}</span>
+                                                <span class={s.tag}>{item.tags && item.tags.length > 0 ? item.tags[0].name : '未分类'}</span>
                                                 <span class={s.amount}>￥<Money value={item.amount} /></span>
                                             </div>
                                             <div class={s.time}>

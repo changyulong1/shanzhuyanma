@@ -47,6 +47,7 @@ export const TagFrom = defineComponent({
             }
         }
         onMounted(async () => {
+            if (props.id === undefined) { return }
             const response = await http.get<Resource<Tag>>
                 (`/tags/${props.id}`, {}, { _mock: 'tagShow' })
             console.log(response.data.resource)

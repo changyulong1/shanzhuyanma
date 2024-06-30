@@ -113,7 +113,6 @@ http.instance.interceptors.response.use(response => {
     return response
 }, (error) => {
     if (error.response) {
-        console.log('error 有错误')
         const axiosError = error as AxiosError
         if (axiosError.response?.status === 426) {
             alert('你太频繁了')

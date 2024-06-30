@@ -15,9 +15,11 @@ export const Overlay = defineComponent({
         const close = () => {
             props.onClose?.()
         }
+        const router = useRouter()
         const route = useRoute()
         const me = ref<User>()
         onMounted(async () => {
+            if (!(localStorage.getItem('jwt'))) { return }
             const resource = await mePromise
             me.value = resource?.data.resource
         })
