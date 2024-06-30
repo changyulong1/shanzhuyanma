@@ -26,6 +26,7 @@ export const ItemSummary = defineComponent({
         const hasMore = ref(false)
         const page = ref(0)
         const fetchItems = async () => {
+            if (!localStorage.getItem('jwt')) { return }
             if (!props.startDate || !props.endDate) { return }
             const response = await http.get<Resources<Item>>('/items', {
                 happen_after: props.startDate,
@@ -36,8 +37,8 @@ export const ItemSummary = defineComponent({
             items.value?.push(...resources)
             hasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
             page.value += 1
-            console.log(items.value)
             console.log(items.value && items.value.length > 0)
+            console.log(props.startDate, props.endDate)
         }
         onMounted(fetchItems)
         watch(() => [props.startDate, props.endDate], () => {
@@ -51,6 +52,7 @@ export const ItemSummary = defineComponent({
             expenses: 0, income: 0, balance: 0
         })
         const fetchItemsBalance = async () => {
+            if (!localStorage.getItem('jwt')) { return }
             if (!props.startDate || !props.endDate) { return }
             const response = await http.get('/items/balance', {
                 happen_after: props.startDate,
@@ -69,7 +71,6 @@ export const ItemSummary = defineComponent({
         })
         return () => (
             <div class={s.wrapper}>
-                <span>{items.value && items.value.length > 0 ? '显示数据' : '不显示数据'}</span>
                 {
                     (items.value && items.value.length > 0) ? (
                         <>
