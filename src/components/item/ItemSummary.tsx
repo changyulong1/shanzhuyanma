@@ -1,4 +1,3 @@
-import { time } from 'echarts'
 import { defineComponent, onMounted, PropType, reactive, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useAfterMe } from '../../hooks/useAfterMe'
@@ -8,7 +7,6 @@ import { Datetime } from '../../shared/Datetime'
 import { FloatButton } from '../../shared/FloatButton'
 import { http } from '../../shared/http'
 import { Icon } from '../../shared/Icon'
-import { mePromise } from '../../shared/me'
 import { Money } from '../../shared/Money'
 import { useItemStore } from '../../stores/useItemStore'
 import s from './ItemSummary.module.scss'
@@ -39,13 +37,19 @@ export const ItemSummary = defineComponent({
             expenses: 0, income: 0, balance: 0
         })
         const fetchItemsBalance = async () => {
-            if (!localStorage.getItem('jwt')) { return }
-            if (!props.startDate || !props.endDate) { return }
-            const response = await http.get('/items/balance', {
-                happen_after: props.startDate,
-                happen_before: props.endDate,
-
-            }, { _mock: 'itemIndexBalance' })
+            if (!props.startDate || !props.endDate) {
+                return
+            }
+            const response = await http.get(
+                '/items/balance',
+                {
+                    happen_after: props.startDate,
+                    happen_before: props.endDate
+                },
+                {
+                    _mock: 'itemIndexBalance'
+                }
+            )
             Object.assign(itemsBalance, response.data)
         }
         useAfterMe(fetchItemsBalance)
@@ -101,8 +105,10 @@ export const ItemSummary = defineComponent({
                             </ol>
                             <div class={s.more}>
                                 {itemStore.hasMore ?
-                                    <Button onClick={() => itemStore.fetchItems(props.startDate, props.endDate)}>加载更多</Button> :
-                                    <span>没有更多</span>
+                                    (<Button onClick={() => itemStore.fetchNextPage(props.startDate, props.endDate)}>加载更多</Button>
+                                    ) : (
+                                        <span>没有更多</span>
+                                    )
                                 }
                             </div>
                         </>
