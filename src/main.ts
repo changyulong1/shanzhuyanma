@@ -4,9 +4,7 @@ import { history } from './shared/history'
 import { createRouter } from 'vue-router'
 import { routes } from './config/routes'
 import '@svgstore'
-import { http } from './shared/http'
-import { fetchMe, mePromise } from './shared/me'
-import { createPinia } from 'pinia'
+import { createPinia, storeToRefs } from 'pinia'
 import { useMeStore } from './stores/useMeStores'
 const router = createRouter({
     // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
@@ -20,7 +18,11 @@ const app = createApp(App)
 app.use(router)
 app.use(pinia)
 app.mount('#app')
+
+
 const meStore = useMeStore()
+//使用storeToRefs实现结构的方式拿到meStore中的mePromise
+const { mePromise } = storeToRefs(meStore)
 meStore.fetchMe()
 
 const whiteList: Record<string, 'exact' | 'startsWith'> = {
@@ -40,7 +42,7 @@ router.beforeEach((to, from) => {
             return true
         }
     }
-    return meStore.mePromise!.then(
+    return mePromise!.value!.then(
         () => true,
         () => '/sign_in?return_to=' + to.path
     )
