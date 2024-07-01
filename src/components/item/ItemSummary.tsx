@@ -1,6 +1,7 @@
 import { time } from 'echarts'
 import { defineComponent, onMounted, PropType, reactive, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useAfterMe } from '../../hooks/useAfterMe'
 import { Button } from '../../shared/Button'
 import { Center } from '../../shared/Center'
 import { Datetime } from '../../shared/Datetime'
@@ -26,6 +27,7 @@ export const ItemSummary = defineComponent({
         const hasMore = ref(false)
         const page = ref(0)
         const fetchItems = async () => {
+            console.log(123)
             if (!localStorage.getItem('jwt')) { return }
             if (!props.startDate || !props.endDate) { return }
             const response = await http.get<Resources<Item>>('/items', {
@@ -37,10 +39,8 @@ export const ItemSummary = defineComponent({
             items.value?.push(...resources)
             hasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
             page.value += 1
-            console.log(items.value && items.value.length > 0)
-            console.log(props.startDate, props.endDate)
         }
-        onMounted(fetchItems)
+        useAfterMe(fetchItems)
         watch(() => [props.startDate, props.endDate], () => {
             console.log('变动过')
             items.value = []
@@ -62,7 +62,7 @@ export const ItemSummary = defineComponent({
             }, { _mock: 'itemIndexBalance' })
             Object.assign(itemsBalance, response.data)
         }
-        onMounted(fetchItemsBalance)
+        useAfterMe(fetchItemsBalance)
         watch(() => [props.startDate, props.endDate], () => {
             Object.assign(itemsBalance, {
                 expenses: 0, income: 0, balance: 0
