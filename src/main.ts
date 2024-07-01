@@ -6,12 +6,22 @@ import { routes } from './config/routes'
 import '@svgstore'
 import { http } from './shared/http'
 import { fetchMe, mePromise } from './shared/me'
+import { createPinia } from 'pinia'
+import { useMeStore } from './stores/useMeStores'
 const router = createRouter({
     // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
     history: history,
     routes// `routes: routes` 的缩写
 })
-fetchMe()
+
+
+const pinia = createPinia()
+const app = createApp(App)
+app.use(router)
+app.use(pinia)
+app.mount('#app')
+const meStore = useMeStore()
+meStore.fetchMe()
 
 const whiteList: Record<string, 'exact' | 'startsWith'> = {
     '/': 'exact',
@@ -30,11 +40,9 @@ router.beforeEach((to, from) => {
             return true
         }
     }
-    return mePromise!.then(
+    return meStore.mePromise!.then(
         () => true,
         () => '/sign_in?return_to=' + to.path
     )
 })
-const app = createApp(App)
-app.use(router)
-app.mount('#app')
+
