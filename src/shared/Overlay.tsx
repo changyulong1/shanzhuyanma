@@ -3,7 +3,6 @@ import { defineComponent, onMounted, PropType, ref } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { useMeStore } from '../stores/useMeStores'
 import { Icon } from './Icon'
-import { mePromise } from './me'
 import s from './Overlay.module.scss'
 export const Overlay = defineComponent({
 
@@ -17,9 +16,8 @@ export const Overlay = defineComponent({
         const close = () => {
             props.onClose?.()
         }
-        const router = useRouter()
-        const route = useRoute()
         const me = ref<User>()
+        const router = useRouter()
         onMounted(async () => {
             const resource = await meStore.mePromise
             me.value = resource?.data.resource
@@ -42,7 +40,7 @@ export const Overlay = defineComponent({
                                 <p onClick={onSignOut}>点击这里退出登录</p>
                             </div>
                         ) : (
-                            <RouterLink to={`/sign_in?return_to=${route.fullPath}`}>
+                            <RouterLink to={`/sign_in`}>
                                 <h2>未登录用户</h2>
                                 <p>点击这里登录</p>
                             </RouterLink>
