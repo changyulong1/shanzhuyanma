@@ -29,7 +29,8 @@ export const Overlay = defineComponent({
                 message: '你真的要退出登录吗？',
             })
             localStorage.removeItem('jwt')
-            router.push('/sign_in')
+            // router.push('/sign_in')
+            window.location.reload()
         }
         return () => <>
             <div class={s.mask} onClick={close}></div>
