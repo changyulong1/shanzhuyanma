@@ -43,7 +43,6 @@ export const useItemStore = (id: string | string[]) =>
                 }
                 this.hasMore = (pager.page - 1) * pager.per_page + resources.length < pager.count
                 this.page += 1
-                console.log(this.items, endDate)
             },
             async fetchNextPage(startDate, endDate) {
                 this._fetch(false, startDate, endDate)

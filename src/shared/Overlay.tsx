@@ -18,6 +18,7 @@ export const Overlay = defineComponent({
         }
         const me = ref<User>()
         const router = useRouter()
+        const route = useRoute()
         onMounted(async () => {
             const resource = await meStore.mePromise
             me.value = resource?.data.resource
@@ -28,6 +29,7 @@ export const Overlay = defineComponent({
                 message: '你真的要退出登录吗？',
             })
             localStorage.removeItem('jwt')
+            router.push('/sign_in')
         }
         return () => <>
             <div class={s.mask} onClick={close}></div>
@@ -40,7 +42,7 @@ export const Overlay = defineComponent({
                                 <p onClick={onSignOut}>点击这里退出登录</p>
                             </div>
                         ) : (
-                            <RouterLink to={`/sign_in`}>
+                            <RouterLink to={`/sign_in?return_to=${route.fullPath}`}>
                                 <h2>未登录用户</h2>
                                 <p>点击这里登录</p>
                             </RouterLink>
