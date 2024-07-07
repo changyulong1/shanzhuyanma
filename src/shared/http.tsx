@@ -64,6 +64,7 @@ const mock = (response: AxiosResponse) => {
     return false
 }
 
+//自动选择 api base
 function isDev() {
     if (location.hostname !== 'localhost'
         && location.hostname !== '127.0.0.1'
