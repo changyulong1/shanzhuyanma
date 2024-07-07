@@ -59,11 +59,11 @@ export const TimeTabsLayout = defineComponent({
         const timeList = [
             {
                 start: time.firstDayOfMonth(),
-                end: time.lastDayOfMonth()
+                end: time.lastDayOfMonth().add(1, 'day')
             },
             {
                 start: time.add(-1, 'month').firstDayOfMonth(),
-                end: time.add(-1, 'month').lastDayOfMonth()
+                end: time.add(-1, 'month').lastDayOfMonth().add(1, 'day')
             },
             {
                 start: time.firstDayOfYear(),

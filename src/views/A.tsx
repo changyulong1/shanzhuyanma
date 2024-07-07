@@ -13,7 +13,6 @@ export const A = defineComponent(
                     <Transition name="fade">
                         <p v-show={show.value}>hello</p>
                     </Transition>
-
                 </div>
 
             </>

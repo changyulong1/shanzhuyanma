@@ -63,7 +63,15 @@ const mock = (response: AxiosResponse) => {
     }
     return false
 }
-export const http = new Http('/api/v1/')
+
+function isDev() {
+    if (location.hostname !== 'localhost'
+        && location.hostname !== '127.0.0.1'
+        && location.hostname !== '192.168.3.57') { return false }
+    return true
+}
+
+export const http = new Http(isDev() ? '/api/v1/' : 'https://mangosteen2.hunger-valley.com/api/v1/')
 
 http.instance.interceptors.request.use(config => {
     const jwt = localStorage.getItem('jwt')
