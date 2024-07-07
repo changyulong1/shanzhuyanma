@@ -6,9 +6,16 @@ import { svgstore } from './src/vite_plugins/svgstore';
 import styleImport, { VantResolve } from 'vite-plugin-style-import';
 
 // https://vitejs.dev/config/
-export default defineConfig(() => {
+
+export default defineConfig(({ command }) => {
   //优化打包逻辑 本别打包多对应的文件夹
   return {
+    //设置环境变量 == 全局变量(DEBUG)
+    define: command === 'build' ? {
+      DEBUG: false
+    } : {
+      DEBUG: true
+    },
     build: {
       rollupOptions: {
         output: {
