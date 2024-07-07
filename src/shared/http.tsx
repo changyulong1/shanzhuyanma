@@ -66,6 +66,7 @@ http.instance.interceptors.response.use((response) => {
     throw error
 })
 
+//mock 不会在生产环境中打包
 
 if (DEBUG) {
     import('../mock/mock').then(
@@ -79,6 +80,11 @@ if (DEBUG) {
             mockTagShow
         }) => {
             const mock = (response: AxiosResponse) => {
+                if (true || location.hostname !== 'localhost'
+                    && location.hostname !== '127.0.0.1'
+                    && location.hostname !== '192.168.3.57') {
+                    return false
+                }
                 switch (response.config?._mock) {
                     case 'tagIndex':
                         [response.status, response.data] = mockTagIndex(response.config)
@@ -103,6 +109,7 @@ if (DEBUG) {
                         return true
                     case 'itemSummary':
                         [response.status, response.data] = mockItemSummary(response.config)
+                        console.log(333)
                         return true
                 }
                 return false

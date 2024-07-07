@@ -29,20 +29,23 @@ export const useItemStore = (id: string | (string | undefined)[]) =>
                         happen_after: startDate,
                         happen_before: endDate,
                         page: firstPage ? 1 : this.page + 1
-                    },
-                    {
-                        _mock: 'itemIndex',
-                        _autoLoading: true
                     }
+                    //不要mock数据
+                    // {
+                    //     _mock: 'itemIndex',
+                    //     _autoLoading: true
+                    // }
                 )
                 const { resources, pager } = response.data
                 if (firstPage) {
                     this.items = resources
+                    console.log('123456', resources)
                 } else {
                     this.items.push(...resources)
                 }
                 this.hasMore = (pager.page - 1) * pager.per_page + resources.length < pager.count
                 this.page += 1
+
             },
             async fetchNextPage(startDate, endDate) {
                 this._fetch(false, startDate, endDate)

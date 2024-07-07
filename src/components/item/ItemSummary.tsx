@@ -80,6 +80,7 @@ export const ItemSummary = defineComponent({
                                             <Money value={itemsBalance.balance} />
                                         </span>
                                     </li>
+
                                 </ul>
                                 <ol class={s.list}>
                                     {itemStore.items.map(item => (
