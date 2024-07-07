@@ -36,6 +36,7 @@ export default defineConfig(({ command }) => {
         }
       }
     },
+    base: '//https://changyulong1.github.io/shanzhu/',
     plugins: [
       vue(),
       vueJsx({

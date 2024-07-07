@@ -39,7 +39,6 @@ export const useItemStore = (id: string | (string | undefined)[]) =>
                 const { resources, pager } = response.data
                 if (firstPage) {
                     this.items = resources
-                    console.log('123456', resources)
                 } else {
                     this.items.push(...resources)
                 }

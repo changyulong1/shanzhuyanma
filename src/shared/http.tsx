@@ -109,7 +109,6 @@ if (DEBUG) {
                         return true
                     case 'itemSummary':
                         [response.status, response.data] = mockItemSummary(response.config)
-                        console.log(333)
                         return true
                 }
                 return false
