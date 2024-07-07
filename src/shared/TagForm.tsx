@@ -42,7 +42,6 @@ export const TagFrom = defineComponent({
                     onFormError(error, (data) => Object.assign(errors, data.errors))
                 )
                 //这样的写法可以得到请求的结果
-                console.log((await promise).data)
                 router.back()
             }
         }
@@ -50,7 +49,6 @@ export const TagFrom = defineComponent({
             if (props.id === undefined) { return }
             const response = await http.get<Resource<Tag>>
                 (`/tags/${props.id}`, {}, { _mock: 'tagShow' })
-            console.log(response.data.resource)
             Object.assign(formData, response.data.resource)
         })
         return () => (

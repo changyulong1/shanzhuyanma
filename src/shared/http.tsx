@@ -40,7 +40,6 @@ const mock = (response: AxiosResponse) => {
             return true
         case 'session':
             [response.status, response.data] = mockSession(response.config)
-            console.log(2, response.data)
             return true
         case 'itemCreate':
             [response.status, response.data] = mockItemCreate(response.config)

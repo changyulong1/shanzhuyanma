@@ -22,7 +22,6 @@ export const ItemSummary = defineComponent({
         }
     },
     setup(props, context) {
-
         const itemStore = useItemStore(['items', props.startDate, props.endDate])
         useAfterMe(() => itemStore.fetchItems(props.startDate, props.endDate))
         watch(() => [props.startDate, props.endDate], () => {

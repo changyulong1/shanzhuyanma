@@ -107,7 +107,7 @@ export const mockItemIndex: Mock = (config) => {
 
 }
 export const mockTagEdit: Mock = config => {
-    console.log(2)
+
     const createTag = (attrs?: any) =>
     ({
         id: createId(),

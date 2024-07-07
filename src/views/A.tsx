@@ -5,7 +5,6 @@ export const A = defineComponent(
         setup() {
             let show = ref(true)
             const onclick = () => {
-                console.log(show)
                 show.value = !show.value
             }
             return () => <>
