@@ -23,3 +23,5 @@ export const ComingSoon = defineComponent({
         )
     }
 })
+//使用懒加载要默认导出
+export default ComingSoon

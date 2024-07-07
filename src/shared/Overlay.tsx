@@ -49,7 +49,6 @@ export const Overlay = defineComponent({
                             </RouterLink>
                         )
                     }
-
                 </section>
                 <nav>
                     <ul class={s.action_list}>

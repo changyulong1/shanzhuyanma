@@ -7,3 +7,5 @@ export const ItemPage = defineComponent({
         )
     }
 })
+//优化打包实现懒加载
+export default ItemPage

@@ -93,3 +93,6 @@ export const SignInPage = defineComponent({
         </>
     }
 })
+
+// 优化打包实现揽件在
+export default SignInPage

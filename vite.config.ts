@@ -7,6 +7,27 @@ import styleImport, { VantResolve } from 'vite-plugin-style-import';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  //优化打包逻辑 本别打包多对应的文件夹
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id: any) {
+          if (id.includes('echarts')) {
+            return 'echarts';
+          }
+          if (id.includes('mock') || id.includes('faker')) {
+            return 'mock';
+          }
+          if (id.includes('vant')) {
+            return 'vant';
+          }
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        }
+      }
+    }
+  },
   plugins: [
     vue(),
     vueJsx({

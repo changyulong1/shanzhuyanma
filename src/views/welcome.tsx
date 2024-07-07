@@ -50,3 +50,6 @@ export const welcome = defineComponent({
         )
     }
 })
+
+//优化打包事件懒加载
+export default welcome 
